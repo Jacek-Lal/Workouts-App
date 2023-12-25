@@ -1,0 +1,163 @@
+Id;Name;Primary Muscle;Secondary Muscle;Equipment;Type
+1;Bench Press (Dumbbells);Chest;Shoulders;Weights;Reps
+2;Bench Press (Barbell);Chest;Shoulders;Weights;Reps
+3;Chest Dip;Chest;Shoulders;Bodyweight;Reps
+4;Push Up;Chest;Triceps;Bodyweight;Reps
+5;Ring Push Up;Chest;Triceps;Bodyweight;Reps
+6;Butterfly;Chest;;Machine;Reps
+7;Cable Fly;Chest;;Machine;Reps
+8;Incline Bench Press (Dumbbells);Chest;Shoulders;Weights;Reps
+9;Pull Up;Lats;Upper Back;Bodyweight;Reps
+10;Chin Up;Lats;Biceps;Bodyweight;Reps
+11;Lat Pulldown;Lats;;Machine;Reps
+12;Single Arm Lat Pulldown;Lats;Biceps;Machine;Reps
+13;Barbell Bent Over Row (Underhand Grip);Lats;Biceps;Weights;Reps
+14;Single Arm Dumbbell Row;Lats;Biceps;Weights;Reps
+15;Chest Supported Incline Row;Lats;Biceps;Weights;Reps
+16;Seated Row (Close Grip);Lats;Biceps;Machine;Reps
+17;Overhead Press;Shoulders ;Triceps;Weights;Reps
+18;Pike Push Up;Shoulders;Triceps;Bodyweight;Reps
+19;Shoulder Press;Shoulders;Triceps;Weights;Reps
+20;Military Press;Shoulders;Triceps;Weights;Reps
+21;Lateral Raise (Dumbbells);Shoulders;;Weights;Reps
+22;Lateral Raise (Cable);Shoulders;;Machine;Reps
+23;Rear Delt Reverse Fly;Shoulders;;Machine;Reps
+24;Face Pull;Shoulders;;Machine;Reps
+25;Bicep Curl (Barbell);Biceps;;Weights;Reps
+26;Bicep Curl (Dumbbells);Biceps;;Weights;Reps
+27;Seated Incline Curl (Dumbbells);Biceps;;Weights;Reps
+28;Bicep Curl (Cable);Biceps;;Machine;Reps
+29;Hammer Curl (Dumbbells);Biceps;;Weights;Reps
+30;Hammer Curl (Cable);Biceps;;Machine;Reps
+31;Preacher Curl (Barbell);Biceps;;Weights;Reps
+32;Concentration Curl;Biceps;;Weights;Reps
+33;Barbell Bent Over Row (Overhand Grip);Upper Back;Shoulders;Weights;Reps
+34;Kroc Row;Upper Back;Shoulders;Weights;Reps
+35;Seated Row (Wide Grip);Upper Back;Shoulders;Machine;Reps
+36;Australian Pull Up;Upper Back;Shoulders;Bodyweight;Reps
+37;Landmine Row;Upper Back;Biceps;Weights;Reps
+38;Scapular Pull Up;Upper Back;Forearms;Bodyweight;Reps
+39;Y-raise;Upper Back;;Weights;Reps
+40;Pendlay Row;Upper Back;Shoulders;Weights;Reps
+41;Diamond Push Up;Triceps;;Bodyweight;Reps
+42;Triceps Dip;Triceps;Shoulders;Bodyweight;Reps
+43;Skullcrusher (Barbell);Triceps;;Weights;Reps
+44;Triceps Extension (Dumbbells);Triceps;;Weights;Reps
+45;Triceps Extension (Cable);Triceps;;Machine;Reps
+46;Triceps Pushdown;Triceps;;Machine;Reps
+47;Skullcrusher (Dumbbells);Triceps;;Weights;Reps
+48;Seated Triceps Press;Triceps;;Machine;Reps
+49;Bicycle Crunch;Abdominals;;Bodyweight;Reps
+50;Leg Raise;Abdominals;;Bodyweight;Reps
+51;Hanging Leg Raise;Abdominals;;Bodyweight;Reps
+52;Hanging Knee Raise;Abdominals;;Bodyweight;Reps
+53;Crunch;Abdominals;;Bodyweight;Reps
+54;Hollow Body Crunch;Abdominals;;Bodyweight;Reps
+55;Sit Up;Abdominals;;Bodyweight;Reps
+56;Ab Wheel;Abdominals;;Bodyweight;Reps
+57;Squat (Barbell);Quadriceps;Glutes;Weights;Reps
+58;Deadlift;Quadriceps;Hamstrings;Weights;Reps
+59;Lunge;Quadriceps;Glutes;Weights;Reps
+60;Reverse Lunge;Quadriceps;Glutes;Weights;Reps
+61;Box Jump;Quadriceps;Glutes;Bodyweight;Reps
+62;Leg Press;Quadriceps;;Machine;Reps
+63;Sissy Squat;Quadriceps;;Bodyweight;Reps
+64;Zercher Squat;Quadriceps;;Weights;Reps
+65;Romanian Deadlift (Barbell);Hamstrings;Glutes;Weights;Reps
+66;Romanian Deadlift (Dumbbells);Hamstrings;Glutes;Weights;Reps
+67;Nordic Curl;Hamstrings;;Bodyweight;Reps
+68;Seated Leg Curl;Hamstrings;;Machine;Reps
+69;Lying Leg Curl;Hamstrings;;Machine;Reps
+70;Single Leg Romanian Deadlift;Hamstrings;;Weights;Reps
+71;Stability Ball Leg Curl;Hamstrings;Glutes;Bodyweight;Reps
+72;Good Morning;Hamstrings;Glutes;Weights;Reps
+73;Dead Hang;Forearms;;Bodyweight;Reps
+74;Pronated Bicep Curl (Barbell);Forearms;;Weights;Reps
+75;Seated Wrist Extension (Dumbbells);Forearms;;Weights;Reps
+76;Behind the Back Wrist Curl (Barbell);Forearms;;Weights;Reps
+77;Seated Wrist Curl (Dumbbells);Forearms;;Weights;Reps
+78;Ab Scissors;Abdominals;;Bodyweight;Reps
+79;Arnold Press;Shoulders;Triceps;Weights;Reps
+80;Pistol Squats;Quadriceps;Glutes;Bodyweight;Reps
+81;Back Extension;Lower Back;;Bodyweight;Reps
+82;Cable Crunch;Abdominals;;Machine;Reps
+83;Calf Extension;Calves;;Machine;Reps
+84;Calf Press;Calves;;Machine;Reps
+85;Chest Fly (Suspension);Chest;;Bodyweight;Reps
+86;Tricep Extension (Suspension);Triceps;;Bodyweight;Reps
+87;Chest Press;Chest;Triceps;Machine;Reps
+88;Incline Push Up;Chest;Triceps;Bodyweight;Reps
+89;Dead Bug;Abdominals;;Bodyweight;Reps
+90;Decline Push Up;Chest;Shoulders;Bodyweight;Reps
+91;Drag Curl;Biceps;;Weights;Reps
+92;Flutter Kicks;Abdominals;;Bodyweight;Reps
+93;Front Lever Hold;Abdominals;;Bodyweight;Time
+94;Tucked Front Lever Hold;Abdominals;;Bodyweight;Time
+95;Plank;Abdominals;;Bodyweight;Time
+96;Hollow Body Crunch;Abdominals;;Bodyweight;Time
+97;Handstand Hold;Shoulders;;Bodyweight;Time
+98;Frog Stand Hold;Shoulders;;Bodyweight;Time
+99;Glute Bridge;Glutes;Hamstrings;Bodyweight;Reps
+100;Goblet Squat;Quadriceps;Glutes;Weights;Reps
+101;Gorilla Row;Lats;Upper Back;Weights;Reps
+102;Handstand Push Up;Shoulders;Triceps;Bodyweight;Reps
+103;Hip Abduction;Glutes;;Machine;Reps
+104;Hip Adduction;Glutes;;Machine;Reps
+105;Hip Thrust;Glutes;Hamstrings;Weights;Reps
+106;Incline Bench Press (Barbell);Chest;Shoulders;Weights;Reps
+107;Jack Knife (Suspension);Abdominals;;Bodyweight;Reps
+108;Shrugs (Dumbbells);Upper Back;;Weights;Reps
+109;Shrugs (Barbell);Upper Back;;Weights;Reps
+110;Jump Squat;Quadriceps;Glutes;Bodyweight;Reps
+111;Jumping Lunge;Quadriceps;Glutes;Bodyweight;Reps
+112;Kneeling Push Up;Chest;Triceps;Bodyweight;Reps
+113;L-Sit Hold;Abdominals;;Bodyweight;Time
+114;Landmine 180;Abdominals;;Weights;Reps
+115;Lateral Lunge;Quadriceps;Glutes;Bodyweight;Reps
+116;Leg Extension;Quadriceps;;Machine;Reps
+117;Muscle Up;Lats;Biceps;Bodyweight;Reps
+118;Negative Pull Up;Lats;Biceps;Bodyweight;Reps
+119;Oblique Crunch;Abdominals;;Bodyweight;Reps
+120;Side Plank;Abdominals;;Bodyweight;Time
+121;One Arm Push Up;Triceps;;Bodyweight;Reps
+122;Overhead Curl;Biceps;;Machine;Reps
+123;Single Arm Preacher Curl;Biceps;;Weights;Reps
+124;Assisted Pull Up;Lats;Biceps;Machine;Reps
+125;Rear Delt Cable Crossover;Shoulders;;Machine;Reps
+126;Reverse Crunch;Abdominals;;Bodyweight;Reps
+127;Ring Dips;Chest;Triceps;Bodyweight;Reps
+128;Ring Pull Up;Lats;Biceps;Bodyweight;Reps
+129;Ring Muscle Up;Lats;Biceps;Bodyweight;Reps
+130;Bench Press - Close Grip (Barbell);Chest;Triceps;Weights;Reps
+131;Seated Overhead Press (Dumbbells);Shoulders;Triceps;Weights;Reps
+132;Seated Overhead Press (Barbell);Shoulders;Triceps;Weights;Reps
+133;Shoulder Taps;Shoulders;;Bodyweight;Reps
+134;Single Arm Cable Curl;Biceps;;Machine;Reps
+135;Single Arm Tricep Extension;Triceps;;Weights;Reps
+136;Single Arm Lateral Raise (Cable);Shoulders;;Machine;Reps
+137;Single Arm Lateral Raise (Dumbbells);Shoulders;;Weights;Reps
+138;Single Leg Hip Thrust;Glutes;Hamstrings;Bodyweight;Reps
+139;Single Leg Hip Thrust (Dumbbells);Glutes;Hamstrings;Weights;Reps
+140;Single Leg Press;Quadriceps;;Machine;Reps
+141;Spider Curl (Dumbbells);Biceps;;Weights;Reps
+142;Spider Curl (Barbell);Biceps;;Weights;Reps
+143;Split Squat (Dumbbells);Quadriceps;Glutes;Weights;Reps
+144;Hack Squat;Quadriceps;Glutes;Machine;Reps
+145;Seated Calf Raise;Calves;;Machine;Reps
+146;Standing Calf Raise (Dumbbells);Calves;;Weights;Reps
+147;Stadning Calf Raise (Smith);Calves;;Machine;Reps
+148;Stadning Calf Raise (Barbell);Calves;;Weights;Reps
+149;Step Up;Quadriceps;Glutes;Bodyweight;Reps
+150;Step Up (Barbell);Quadriceps;Glutes;Weights;Reps
+151;Step Up (Dumbbells);Quadriceps;Glutes;Weights;Reps
+152;Pull Up - Neutral Grip;Lats;Biceps;Bodyweight;Reps
+153;Superman;Lower Back;;Bodyweight;Reps
+154;T Bar Row;Upper Back;Biceps;Weights;Reps
+155;Toes To Bar;Abdominals;;Bodyweight;Reps
+156;Triceps Kickback (Cable);Triceps;;Machine;Reps
+157;Straight Leg Deadlift;Hamstrings;Glutes;Weights;Reps
+158;V Up;Abdominals;;Bodyweight;Reps
+159;Walking Lunge;Quadriceps;Glutes;Bodyweight;Reps
+160;Walking Lunge (Dumbbells);Quadriceps;Glutes;Weights;Reps
+161;Wall Sit;Quadriceps;;Bodyweight;Time
+162;Wide Pull Up;Lats;Upper Back;Bodyweight;Reps

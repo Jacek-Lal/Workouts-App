@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?> -->
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="mainContainer" prefHeight="600.0" prefWidth="900.0" styleClass="greyContainer" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.MainController">
+   <children>
+      <Button id="newWorkoutButton" layoutX="410.0" layoutY="354.0" mnemonicParsing="false" onAction="#goToNewWorkoutModalView" prefHeight="80.0" prefWidth="80.0">
+         <font>
+            <Font size="35.0" />
+         </font>
+         <styleClass>
+            <String fx:value="buttonPurple" />
+            <String fx:value="button" />
+         </styleClass>
+      </Button>
+      <Label layoutX="401.0" layoutY="441.0" text="New Workout" textAlignment="CENTER" textFill="#eeeeee">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button id="workoutHistoryButton" layoutX="175.0" layoutY="165.0" mnemonicParsing="false" onAction="#goToWorkoutHistoryView" prefHeight="80.0" prefWidth="80.0">
+         <font>
+            <Font size="35.0" />
+         </font>
+         <styleClass>
+            <String fx:value="buttonPurple" />
+            <String fx:value="button" />
+         </styleClass>
+      </Button>
+      <Button id="exercisesButton" layoutX="633.0" layoutY="165.0" mnemonicParsing="false" onAction="#goToExercisesView" prefHeight="80.0" prefWidth="80.0">
+         <font>
+            <Font size="35.0" />
+         </font>
+         <styleClass>
+            <String fx:value="buttonPurple" />
+            <String fx:value="button" />
+         </styleClass>
+      </Button>
+      <Label layoutX="158.0" layoutY="253.0" text="Workout history" textAlignment="CENTER" textFill="#eeeeee">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="642.0" layoutY="253.0" text="Exercises" textAlignment="CENTER" textFill="#eeeeee">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <!--  <FontAwesomeIcon fill="#eeeeee" glyphName="LIST" layoutX="658.0" layoutY="217.0" size="30" text="" wrappingWidth="30.0" />
+      <FontAwesomeIcon fill="#eeeeee" glyphName="PLUS" layoutX="438.0" layoutY="404.0" size="30" />
+      <FontAwesomeIcon fill="#eeeeee" glyphName="ROCKET" layoutX="200.0" layoutY="215.0" size="30" />-->
+   </children>
+</AnchorPane>

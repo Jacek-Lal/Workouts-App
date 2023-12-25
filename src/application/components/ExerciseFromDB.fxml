@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="115.0" maxWidth="215.0" minHeight="115.0" minWidth="215.0" prefHeight="115.0" prefWidth="215.0" styleClass="exerciseFromDb" stylesheets="@../application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="5.0" prefHeight="55.0" prefWidth="189.0" text="Exercise Name" textAlignment="CENTER" textFill="#eeeeee" wrapText="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="13.0" layoutY="65.0" text="Muscles:" textFill="#eeeeee">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="88.0" text="Type: " textFill="#eeeeee">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="65.0" layoutY="65.0" prefHeight="19.0" prefWidth="72.0" text="1st" textFill="#eeeeee">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="140.0" layoutY="65.0" prefHeight="19.0" prefWidth="66.0" text="2nd" textFill="#eeeeee">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="65.0" layoutY="88.0" prefHeight="19.0" prefWidth="72.0" text="type" textFill="#eeeeee">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Label>
+   </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+</Pane>

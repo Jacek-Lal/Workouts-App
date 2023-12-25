@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="282.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="105.0" prefWidth="282.0" style="-fx-background-color: #222;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="name" alignment="TOP_LEFT" layoutX="14.0" layoutY="10.0" prefHeight="50.0" prefWidth="119.0" text="Workout name" textFill="#eeeeee" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="date" alignment="CENTER_RIGHT" layoutX="148.0" layoutY="14.0" prefHeight="19.0" prefWidth="119.0" text="Workout date" textFill="#999999">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="time" layoutX="24.0" layoutY="70.0" prefHeight="25.0" prefWidth="56.0" text="0h 00m" textFill="#eeeeee">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="volume" layoutX="113.0" layoutY="70.0" prefHeight="25.0" prefWidth="56.0" text="5192kg" textFill="#eeeeee">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="sets" layoutX="208.0" layoutY="70.0" prefHeight="25.0" prefWidth="56.0" text="22 sets" textFill="#eeeeee">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

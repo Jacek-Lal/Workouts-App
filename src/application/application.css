@@ -1,0 +1,47 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.greyContainer{
+	-fx-background-color: #333;
+}
+.button{
+	-fx-background-color: #7F74AB;
+	-fx-background-radius: 50% ;
+}
+.button-cancel{
+	-fx-background-color: #333;
+	-fx-border-color: #eee;
+	-fx-background-radius: 5 ;
+	-fx-border-radius: 5;
+	
+}
+.button:hover{
+	-fx-opacity: 0.9;
+	-fx-background-size: 1.1;
+}
+.button-ok{
+	-fx-border-color: #7F74AB;
+	-fx-background-radius: 5 ;
+	-fx-border-radius: 5;
+}
+.modal{
+	-fx-background-color: #444;
+	
+}
+.side_pane{
+	-fx-background-color: #222;
+}
+.exerciseNote:focused{
+	-fx-background-color: #444;
+}
+.exerciseFromDb{
+	-fx-background-color: #222;
+}
+.exerciseFromDb:hover{
+	-fx-opacity: 0.8;
+}
+.scroll-pane > .viewport{
+	-fx-background-color: transparent;
+}
+.info_label{
+	-fx-font: 16px white;
+}

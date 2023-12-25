@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="detailsContentPane" prefHeight="346.0" prefWidth="332.0" style="-fx-background-color: #333;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="13.0" layoutY="39.0" text="Heaviest Weight" textFill="#eeeeee">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="234.0" layoutY="91.0" text="Best 1RM" textFill="#eeeeee">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="heaviestWeightLabel" layoutX="13.0" layoutY="69.0" prefHeight="27.0" prefWidth="83.0" text="Label" textFill="#7f74ab">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="bestRmLabel" alignment="CENTER_RIGHT" layoutX="233.0" layoutY="121.0" prefHeight="27.0" prefWidth="83.0" text="Label" textFill="#7f74ab">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="165.0" text="Best Set Volume" textFill="#eeeeee">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="133.0" layoutY="239.0" text="Best Session Volume" textFill="#eeeeee">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="bestSetVolLabel" layoutX="14.0" layoutY="195.0" prefHeight="27.0" prefWidth="83.0" text="Label" textFill="#7f74ab">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="bestSessVolLabel" alignment="CENTER_RIGHT" layoutX="232.0" layoutY="269.0" prefHeight="27.0" prefWidth="83.0" text="Label" textFill="#7f74ab">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
