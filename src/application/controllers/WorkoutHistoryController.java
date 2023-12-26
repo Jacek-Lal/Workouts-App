@@ -2,10 +2,10 @@ package application.controllers;
 
 import application.utility.CsvLoader;
 import application.utility.LabelManager;
-import javafx.collections.ObservableList;
+import application.utility.SceneLoader;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -52,7 +52,7 @@ public class WorkoutHistoryController {
 			String currDate = record.get("Time");
 			
 			if(!currDate.equals(workoutDate)) {
-				List<String> wrapUpData = Arrays.asList(workoutName, workoutDate, "None", workoutVolume + "kg", workoutSets + " sets");
+				List<String> wrapUpData = List.of(workoutName, workoutDate, "None", workoutVolume + "kg", workoutSets + " sets");
 
 				addWrapUp(root, wrapUpData);
 
@@ -71,16 +71,14 @@ public class WorkoutHistoryController {
 			workoutSets += 1;
 
 		}
-		List<String> wrapUpData = Arrays.asList(workoutName, workoutDate, "None", workoutVolume + "kg", workoutSets + " sets");
+		List<String> wrapUpData = List.of(workoutName, workoutDate, "None", workoutVolume + "kg", workoutSets + " sets");
 		addWrapUp(root, wrapUpData);
 		
 	}
 	private void addWrapUp(Parent root, List<String> data) {
 			
-		ObservableList<Node> labels = ((Pane)root).getChildren();
-		for(int i = 0; i < labels.size(); i++){
-			((Label)labels.get(i)).setText(data.get(i));
-		}
+		List<Label> labels = LabelManager.getLabelsWithId(root);
+		LabelManager.addDataToLabels(labels, data);
 
 		root.setOnMouseClicked(e -> {
             List<HashMap<String, String>> workoutRecords = getWorkoutRecords(data.get(1));
@@ -132,5 +130,8 @@ public class WorkoutHistoryController {
 		return this.workoutHistory.stream()
 				.filter(r -> r.get("Time").equals(date))
 				.collect(Collectors.toList());
+	}
+	public void goToMainView(ActionEvent e) throws IOException{
+		new SceneLoader().loadMain(e);
 	}
 }

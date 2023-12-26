@@ -49,14 +49,14 @@
             </Label>
          </children>
       </Pane>
-      <Button fx:id="addExerciseButton" layoutX="416.0" layoutY="520.0" mnemonicParsing="false" onAction="#showExercises" prefHeight="38.0" prefWidth="320.0" styleClass="button-ok" text="Add exercise" textFill="#eeeeee">
+      <Button fx:id="addExerciseButton" layoutX="416.0" layoutY="521.0" mnemonicParsing="false" onAction="#showExercises" prefHeight="38.0" prefWidth="320.0" styleClass="button-ok" text="Add exercise" textFill="#eeeeee">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <ScrollPane fx:id="exercisesScrollPane" hbarPolicy="NEVER" hmin="10.0" hvalue="10.0" layoutX="376.0" layoutY="49.0" prefHeight="450.0" prefWidth="401.0" style="-fx-background-color: #333;" vbarPolicy="NEVER">
+      <ScrollPane fx:id="exercisesScrollPane" hbarPolicy="NEVER" hmin="10.0" hvalue="10.0" layoutX="359.0" layoutY="49.0" prefHeight="451.0" prefWidth="434.0" style="-fx-background-color: #333;" vbarPolicy="NEVER">
          <content>
-            <VBox fx:id="exercisesContainer" prefHeight="450.0" prefWidth="402.0" style="-fx-background-color: #222;" />
+            <VBox fx:id="exercisesContainer" prefHeight="451.0" prefWidth="433.0" style="-fx-background-color: #222;" />
          </content>
       </ScrollPane>
    </children>

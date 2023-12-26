@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -35,7 +36,7 @@ public class NewWorkoutController {
 	@FXML
 	public ScrollPane exercisesScrollPane;
 	@FXML
-	private VBox exercisesContainer;
+	public VBox exercisesContainer;
 	
 	@FXML
 	public void initialize() {
@@ -51,8 +52,8 @@ public class NewWorkoutController {
 		Parent root = loader.load();	
 		Scene scene = new Scene(root);
 		Stage stage = new Stage();
-		ExerciseListController controller = loader.getController();	
-		
+		ExerciseListController controller = loader.getController();
+
 		stage.setTitle("Exercises List");
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.initOwner(((Node) e.getSource()).getScene().getWindow());
@@ -63,16 +64,12 @@ public class NewWorkoutController {
 		stage.show();	
 	}
 	public void addExercise(String exerciseName) throws IOException{
-		for(SingleExerciseController exercise : exerciseControllers) {
-			if(exercise.exerciseRecord.getName().equals(exerciseName)) return;
-		}
-		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(EXERCISE_COMPONENT_PATH));
 		Parent root = loader.load();	
 		SingleExerciseController controller = loader.getController();
 		
 		VBox.setVgrow(root, Priority.ALWAYS);
-		controller.setup(this, exerciseName);
+		controller.setup(this,(Pane)root, exerciseName);
 		
 		exerciseControllers.add(controller);
 		exercisesContainer.getChildren().add(root);
@@ -85,6 +82,7 @@ public class NewWorkoutController {
 			workout.addExercise(exercise.exerciseRecord);
 		}
 		this.convertToCsv();
+
 		new SceneLoader().loadMain(e);
 	}
 	private void convertToCsv() throws IOException{

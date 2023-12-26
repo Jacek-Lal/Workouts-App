@@ -1,5 +1,7 @@
 package application.controllers;
 
+import application.utility.SceneLoader;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -45,6 +47,9 @@ public class ExercisesController extends ExerciseListController{
 		stage.setScene(scene);
 
 		stage.show();
+	}
+	public void goToMainView(ActionEvent e) throws IOException{
+		new SceneLoader().loadMain(e);
 	}
 }
 

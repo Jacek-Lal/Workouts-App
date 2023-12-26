@@ -83,7 +83,7 @@ public class ExerciseDetailsController{
 				root = loader.load();
 				
 				List<Label> labels = LabelManager.getLabelsWithId(root);
-				LabelManager.addDataToLabels(labels, Arrays.asList(record.get("Name"),record.get("Time"),record.get("Exercise"),record.get("Description")));
+				LabelManager.addDataToLabels(labels, List.of(record.get("Name"),record.get("Time"),record.get("Exercise"),record.get("Description")));
 				setsContainer = (VBox)((ScrollPane)((Pane)root).getChildren().getLast()).getContent();
 				
 				detailsContainer.getChildren().addFirst(root);
@@ -93,7 +93,7 @@ public class ExerciseDetailsController{
 				Parent set = setLoader.load();
 				
 				List<Label> labels = LabelManager.getLabelsWithId(set);
-				LabelManager.addDataToLabels(labels, Arrays.asList(record.get("SetNumber"), record.get("Weight")+"kg", record.get("Reps")+" reps"));
+				LabelManager.addDataToLabels(labels, List.of(record.get("SetNumber"), record.get("Weight")+"kg", record.get("Reps")+" reps"));
 
                 assert setsContainer != null;
                 setsContainer.getChildren().add(set);
@@ -124,26 +124,25 @@ public class ExerciseDetailsController{
 			double weight = Double.parseDouble(record.get("Weight"));
 			int reps = Integer.parseInt(record.get("Reps"));
 			double rm = Math.round(heaviestWeight * (1 + (0.0333 * reps))*100.0)/100.0;
+
 			double volume = weight * reps;		
-		
-			if (weight > heaviestWeight) heaviestWeight = weight;
-			if(rm > bestRM) bestRM = rm;
-			if(volume > bestSetVol) bestSetVol = volume;
+
+			heaviestWeight = Math.max(weight, heaviestWeight);
+			bestRM = Math.max(rm, bestRM);
+			bestSetVol = Math.max(volume, bestSetVol);
+
 
 			if(currDate.equals(record.get("Time")))
 				sessionVolume += volume;
 			else {
-				
-				if(sessionVolume > bestSessVol) bestSessVol = sessionVolume;
-				
-				sessionVolume = 0;
-				sessionVolume += volume;
+				bestSessVol = Math.max(sessionVolume, bestSessVol);
+
+				sessionVolume = volume;
 				currDate = record.get("Time");
 			}		
 		}
-		
-		if(sessionVolume > bestSessVol) bestSessVol = sessionVolume;
+		bestSessVol = Math.max(sessionVolume, bestSessVol);
 
-        return new ArrayList<>(Arrays.asList(heaviestWeight+"kg", bestRM+"kg", bestSetVol+"kg", bestSessVol+"kg"));
+        return List.of(heaviestWeight+"kg", bestRM+"kg", bestSetVol+"kg", bestSessVol+"kg");
 	}
 }

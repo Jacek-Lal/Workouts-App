@@ -1,16 +1,19 @@
 package application.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 
 public class SetController {
 	private int id;
 	private double weight;
 	private int reps;
 	private Label totalVolumeLabel;
-	
+	private SingleExerciseController parent;
+	public HBox container;
 	@FXML
 	private Label setIdLabel;
 	@FXML
@@ -18,8 +21,10 @@ public class SetController {
 	@FXML
 	private TextField repsLabel;
 	
-	public void setup(Label label, int id) {
-		this.totalVolumeLabel = label;
+	public void setup(SingleExerciseController parent, HBox root, int id) {
+		this.parent = parent;
+		this.totalVolumeLabel = parent.parent.totalWeightLabel;
+		this.container = root;
 		this.id = id;
 		this.weight = 0;
 		this.reps = 0;
@@ -69,6 +74,16 @@ public class SetController {
 		double newVolume = totalVolume + this.getSetVolume();
 		this.totalVolumeLabel.setText(String.valueOf(newVolume));
 	}
+
+	public void removeSet(){
+		// Update total workout volume
+		double totalVolume = Double.parseDouble(totalVolumeLabel.getText());
+		double newVolume = totalVolume - this.getSetVolume();
+		this.totalVolumeLabel.setText(String.valueOf(newVolume));
+
+		parent.removeSet(this);
+	}
+	public void setId(int id){this.id = id;}
 	public int getId() {return this.id;}
 	public double getWeight() {return this.weight;}
 	public int getReps() {return this.reps;}
