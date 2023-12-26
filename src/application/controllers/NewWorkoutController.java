@@ -7,6 +7,7 @@ import java.util.List;
 import application.objects.ExerciseRecord;
 import application.objects.SetRecord;
 import application.objects.WorkoutRecord;
+import application.utility.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,9 +21,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class NewWorkoutController extends Controller<Object> {
-	private static final String EXERCISE_LIST_SCENE_PATH = SCENES_PATH + "ExercisesList.fxml";
-	private static final String EXERCISE_COMPONENT_PATH = COMPONENTS_PATH + "Exercise.fxml";
+public class NewWorkoutController {
+	private static final String EXERCISE_LIST_SCENE_PATH = "/application/scenes/" + "ExercisesList.fxml";
+	private static final String EXERCISE_COMPONENT_PATH = "/application/components/"+ "Exercise.fxml";
 	private WorkoutRecord workout;
 	private List<SingleExerciseController> exerciseControllers;
 	@FXML
@@ -41,12 +42,10 @@ public class NewWorkoutController extends Controller<Object> {
 		this.exerciseControllers = new ArrayList<>();
 		this.workout = new WorkoutRecord();
 	}
-	
 	public void setWorkoutName(String name) {
 		this.workoutNameLabel.setText(name);
 		this.workout.setName(name);
-	}	
-	
+	}
 	public void showExercises(ActionEvent e) throws IOException{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(EXERCISE_LIST_SCENE_PATH));
 		Parent root = loader.load();	
@@ -63,7 +62,6 @@ public class NewWorkoutController extends Controller<Object> {
 		
 		stage.show();	
 	}
-	
 	public void addExercise(String exerciseName) throws IOException{
 		for(SingleExerciseController exercise : exerciseControllers) {
 			if(exercise.exerciseRecord.getName().equals(exerciseName)) return;
@@ -79,43 +77,44 @@ public class NewWorkoutController extends Controller<Object> {
 		exerciseControllers.add(controller);
 		exercisesContainer.getChildren().add(root);
 		
-		scrollDown(exercisesScrollPane);	
+		scrollDown();
 	}
-	
 	public void saveWorkout(ActionEvent e) throws IOException {
 		for (SingleExerciseController exercise : exerciseControllers) {
 			exercise.saveExercise();
 			workout.addExercise(exercise.exerciseRecord);
 		}
 		this.convertToCsv();
-		this.goToMainView(e);
+		new SceneLoader().loadMain(e);
 	}
-	
 	private void convertToCsv() throws IOException{
     	FileWriter outputFile = new FileWriter("src/application/Workouts.csv", true);
 
 		for(ExerciseRecord exercise : workout.getExercises()) {
-			for (SetRecord set : exercise.getSets()) {				
-				outputFile.append(workout.getName());
-				outputFile.append(";");
-				outputFile.append(workout.getDate());
-				outputFile.append(";");
-				outputFile.append(exercise.getName());
-				outputFile.append(";");
-				outputFile.append(exercise.getDescription());
-				outputFile.append(";");
-				outputFile.append(set.getId());
-				outputFile.append(";");
-				outputFile.append(set.getWeight());
-				outputFile.append(";");
-				outputFile.append(set.getReps());
-				outputFile.append("\n");
+			for (SetRecord set : exercise.getSets()) {
+				writeToCsv(outputFile,
+						workout.getName(),
+						workout.getDate(),
+						exercise.getName(),
+						exercise.getDescription(),
+						set.getId(),
+						set.getWeight(),
+						set.getReps());
 			}
 		}
 		outputFile.flush();
 		outputFile.close();
-	}	
-
-	
-	   
+	}
+	private void writeToCsv(FileWriter outputFile, String... values) throws IOException {
+		for(String value : values){
+			outputFile.append(value);
+			outputFile.append(";");
+		}
+		outputFile.append("\n");
+	}
+	public void scrollDown() {
+		exercisesScrollPane.applyCss();
+		exercisesScrollPane.layout();
+		exercisesScrollPane.setVvalue(exercisesScrollPane.getVmax());
+	}
 }

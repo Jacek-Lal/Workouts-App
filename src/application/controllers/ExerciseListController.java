@@ -1,5 +1,6 @@
 package application.controllers;
 
+import application.utility.CsvLoader;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -21,8 +22,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ExerciseListController extends Controller<Object> {
-	private static final String DATABASE_EXERCISE_COMPONENT_PATH = COMPONENTS_PATH + "ExerciseFromDB.fxml";
+public class ExerciseListController {
+	private static final String DATABASE_EXERCISE_COMPONENT_PATH = "/application/components/" + "ExerciseFromDB.fxml";
+
 	public Stage stage;
 	public NewWorkoutController parent;
 	private final List<HashMap<String, String>> exerciseList;
@@ -39,18 +41,16 @@ public class ExerciseListController extends Controller<Object> {
 	private GridPane exercisesGrid;
 	
 	public ExerciseListController() {
-		this.exerciseList = this.loadExercises();
+		this.exerciseList = CsvLoader.loadExercises();
 		this.activeEquipmentFilter = "";
 		this.activeMuscleFilter = "";
 	}
-
 	public void setup(Stage stage, NewWorkoutController parent) throws IOException {
 		this.stage = stage;
 		this.parent = parent;
 		showExercises();
 		setFilters();
 	}
-	
 	public void chooseExercise(MouseEvent e) throws IOException{
 		Pane exercise = ((Pane)e.getSource());
 		String exerciseName = ((Label)exercise.getChildren().getFirst()).getText();
@@ -58,8 +58,7 @@ public class ExerciseListController extends Controller<Object> {
 		parent.addExercise(exerciseName);
 		stage.close();
 	}
-	
-	private void showExercises() throws IOException {
+	protected void showExercises() throws IOException {
 		int counter = 0;
 		List<HashMap<String, String>> filteredExercises = getFilteredExercises();
 		
@@ -71,7 +70,7 @@ public class ExerciseListController extends Controller<Object> {
 			
 			root.setOnMouseClicked(e -> {
                 try { chooseExercise(e); }
-                catch (IOException e1) { e1.printStackTrace(); }
+                catch (IOException err) { err.printStackTrace(); }
             });
 			
 			ObservableList<Node> labels = root.getChildren(); 
@@ -91,8 +90,7 @@ public class ExerciseListController extends Controller<Object> {
 		}
 
 	}
-	
-	private void setFilters() {	
+	protected void setFilters() {
 		Set<String> equipmentNames = exerciseList.stream().map(map -> map.get("Equipment")).collect(Collectors.toSet());
 		Set<String> muscleNames = exerciseList.stream().map(map -> map.get("Primary Muscle")).collect(Collectors.toSet());
 		Set<String> secondaryMuscleNames = exerciseList.stream().map(map -> map.get("Secondary Muscle")).collect(Collectors.toSet());
@@ -105,7 +103,6 @@ public class ExerciseListController extends Controller<Object> {
 		setMenuItems(this.musclesFilter, muscleNames);
 		setMenuItems(this.equipmentFilter, equipmentNames);		
 	}
-	
 	private void setMenuItems(MenuButton menu, Set<String> names) {
 		for(String name : names) {
 			if(name.isEmpty()) continue;
@@ -122,11 +119,10 @@ public class ExerciseListController extends Controller<Object> {
 			menu.getItems().add(menuItem);
 		}
 	}
-
 	private void handleFilterMenu(Event event, MenuButton menu, MenuItem menuItem) throws IOException {
 		String clickedItem = ((MenuItem)event.getTarget()).getText();
 		menu.setText(clickedItem);
-		
+
 		if(menuItem.getId().equals("activeMuscle"))
 			this.activeMuscleFilter = clickedItem;
 		else 
@@ -135,7 +131,6 @@ public class ExerciseListController extends Controller<Object> {
 		this.exercisesGrid.getChildren().clear();
 		this.showExercises();
 	}
-
 	public void handleSearchBar(KeyEvent e) throws IOException {	
 		
 		if((!e.getCharacter().matches("^[a-zA-Z\b ]*$"))) 
@@ -144,7 +139,6 @@ public class ExerciseListController extends Controller<Object> {
 		this.exercisesGrid.getChildren().clear();
 		this.showExercises();
 	}
-	
 	private List<HashMap<String, String>> getFilteredExercises() {
 		return this.exerciseList.stream()
 				.filter(r -> this.activeMuscleFilter.isEmpty() || r.get("Primary Muscle").equals(this.activeMuscleFilter))

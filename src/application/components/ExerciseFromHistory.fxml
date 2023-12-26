@@ -26,7 +26,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <ScrollPane fx:id="setsScrollPane" hbarPolicy="NEVER" layoutX="38.0" layoutY="152.0" prefWidth="317.0" style="-fx-background-color: #222;" vbarPolicy="NEVER">
+      <ScrollPane hbarPolicy="NEVER" layoutX="38.0" layoutY="152.0" prefWidth="317.0" style="-fx-background-color: #222;" vbarPolicy="NEVER">
          <content>
             <VBox fx:id="setsContainer" prefWidth="316.0" spacing="5.0" style="-fx-background-color: #222;">
                <children>

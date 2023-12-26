@@ -5,12 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
-public class SetController extends Controller<Object> {
-
+public class SetController {
 	private int id;
 	private double weight;
 	private int reps;
-
 	private Label totalVolumeLabel;
 	
 	@FXML
@@ -28,11 +26,10 @@ public class SetController extends Controller<Object> {
 		
 		setIdLabel.setText(Integer.toString(id));
 	}
-	
 	public void validateInput(KeyEvent e) {
 		TextField textField = (TextField)e.getSource();
 		if (textField.getText().isEmpty()) return;
-		//System.out.println(textField.getId().equals("weightLabel"));
+
 		if(textField.getId().equals("weightLabel")) {
 			if((!e.getCharacter().matches("[0-9\b,.]"))) {
 				textField.deletePreviousChar();
@@ -53,7 +50,6 @@ public class SetController extends Controller<Object> {
 		
 		updateTotalVolume();
 	}
-	
 	public void updateTotalVolume()  {
 				
 		// Get total workout volume excluding this set
@@ -73,13 +69,8 @@ public class SetController extends Controller<Object> {
 		double newVolume = totalVolume + this.getSetVolume();
 		this.totalVolumeLabel.setText(String.valueOf(newVolume));
 	}
-	
-
 	public int getId() {return this.id;}
-	
 	public double getWeight() {return this.weight;}
-	
 	public int getReps() {return this.reps;}
-	
 	public double getSetVolume() {return this.weight*this.reps;}
 }

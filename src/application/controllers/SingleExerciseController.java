@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SingleExerciseController extends Controller<Object> {
+public class SingleExerciseController {
 	private static final String SET_COMPONENT_PATH = "/application/components/Set.fxml";
 	public ExerciseRecord exerciseRecord;
 	public List<SetController> allSets; 
@@ -35,7 +35,6 @@ public class SingleExerciseController extends Controller<Object> {
 		
 		addSet();
 	}
-	
 	public void addSet() throws IOException{		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(SET_COMPONENT_PATH));
 		Parent root = loader.load();
@@ -48,16 +47,14 @@ public class SingleExerciseController extends Controller<Object> {
 		
 		setsContainer.getChildren().add(controller.getId(),root);
 		
-		scrollDown(parent.exercisesScrollPane);
+		parent.scrollDown();
 		
 		updateTotalSets();
 	}
-		
 	private void updateTotalSets() {
 		int currentSets = Integer.parseInt(parent.totalSetsLabel.getText());
 		parent.totalSetsLabel.setText(String.valueOf(currentSets + 1));
 	}
-
 	public void saveExercise() {
 		exerciseRecord.setDescription(descriptionField.getText());
 		
