@@ -1,19 +1,22 @@
 package application.objects;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class WorkoutRecord {
-	private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+	public static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 	
 	private String name;
-	public final LocalDateTime date;
+	public final LocalDateTime startTime;
+	public LocalDateTime endTime;
 	private final ArrayList<ExerciseRecord> exercises;
 
 	public WorkoutRecord() {
 		this.name = "";
-		this.date = LocalDateTime.now();
+		this.startTime = LocalDateTime.now();
 		this.exercises = new ArrayList<>();
 	}
 	public void setName(String name) {
@@ -22,8 +25,26 @@ public class WorkoutRecord {
 	public String getName() {
 		return this.name;
 	}
-	public String getDate() {
-		return this.date.format(dtf);
+	public String getStartTime() {
+		return this.startTime.format(dtf);
+	}
+	public String getEndTime() {
+		return this.endTime.format(dtf);
+	}
+	public static String getDuration(String start, String end){
+		Duration duration = Duration.between(LocalTime.parse(start, WorkoutRecord.dtf), LocalTime.parse(end, WorkoutRecord.dtf));
+		StringBuilder formattedTime = new StringBuilder();
+		duration = duration.plusSeconds(1);
+
+		if (duration.toHours() > 0) {
+			formattedTime.append(duration.toHours()).append("h ");
+		}
+		if(duration.toMinutes() > 0){
+			formattedTime.append(duration.toMinutes()%60).append("min ");
+		}
+		formattedTime.append(duration.getSeconds()%60).append("s");
+
+		return formattedTime.toString();
 	}
 	public void addExercise(ExerciseRecord exercise){
 		this.exercises.add(exercise);

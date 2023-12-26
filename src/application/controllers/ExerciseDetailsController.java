@@ -1,7 +1,7 @@
 package application.controllers;
 
-import application.utility.LabelManager;
 import application.utility.CsvLoader;
+import application.utility.LabelManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,8 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -77,26 +75,34 @@ public class ExerciseDetailsController{
 
 		for (HashMap<String, String> record : this.currentExerciseRecords) {
 			
-			if(!currDate.equals(record.get("Time"))) {
-				currDate = record.get("Time");
+			if(!currDate.equals(record.get("EndTime"))) {
+				currDate = record.get("EndTime");
 
 
 				FXMLLoader headerLoader = new FXMLLoader(getClass().getResource(WORKOUT_HEADER_COMPONENT_PATH));
 				Parent header = headerLoader.load();
 				List<Label> headerLabels = LabelManager.getLabelsWithId(header);
-				LabelManager.addDataToLabels(headerLabels, List.of(record.get("Name"),record.get("Time")));
+				LabelManager.addDataToLabels(headerLabels, List.of(record.get("Name"),record.get("StartTime")));
 
 				exerciseLoader = new FXMLLoader(getClass().getResource(EXERCISE_HISTORY_COMPONENT_PATH));
 				exercise = exerciseLoader.load();
 
+				VBox box = (VBox) ((Pane) exercise).getChildren().getLast();
+				Label descLabel = (Label) box.getChildren().getFirst();
+				setsContainer = (VBox) ((ScrollPane) box.getChildren().getLast()).getContent();
 				List<Label> exerciseLabels = LabelManager.getLabelsWithId(exercise);
+
+				if(record.get("Description").isEmpty())
+					box.getChildren().remove(descLabel);
+				else
+					exerciseLabels.add(descLabel);
+
 				LabelManager.addDataToLabels(exerciseLabels, List.of(record.get("Exercise"),record.get("Description")));
-				setsContainer = (VBox)((ScrollPane)((Pane)exercise).getChildren().getLast()).getContent();
-				
+
 				detailsContainer.getChildren().addFirst(exercise);
 				detailsContainer.getChildren().addFirst(header);
 			}
-			if(currDate.equals(record.get("Time"))) {
+			if(currDate.equals(record.get("EndTime"))) {
 				FXMLLoader setLoader = new FXMLLoader(getClass().getResource(SET_HISTORY_COMPONENT_PATH));
 				Parent set = setLoader.load();
 				
@@ -127,7 +133,7 @@ public class ExerciseDetailsController{
 		
 		for (HashMap<String, String> record : this.currentExerciseRecords) {
 			
-			if(currDate.isEmpty()) currDate = record.get("Time");
+			if(currDate.isEmpty()) currDate = record.get("EndTime");
 			
 			double weight = Double.parseDouble(record.get("Weight"));
 			int reps = Integer.parseInt(record.get("Reps"));
@@ -140,13 +146,13 @@ public class ExerciseDetailsController{
 			bestSetVol = Math.max(volume, bestSetVol);
 
 
-			if(currDate.equals(record.get("Time")))
+			if(currDate.equals(record.get("EndTime")))
 				sessionVolume += volume;
 			else {
 				bestSessVol = Math.max(sessionVolume, bestSessVol);
 
 				sessionVolume = volume;
-				currDate = record.get("Time");
+				currDate = record.get("EndTime");
 			}		
 		}
 		bestSessVol = Math.max(sessionVolume, bestSessVol);

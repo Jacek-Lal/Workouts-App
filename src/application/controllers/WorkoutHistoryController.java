@@ -1,5 +1,6 @@
 package application.controllers;
 
+import application.objects.WorkoutRecord;
 import application.utility.CsvLoader;
 import application.utility.LabelManager;
 import application.utility.SceneLoader;
@@ -13,6 +14,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,23 +47,25 @@ public class WorkoutHistoryController {
 		Parent root = loader.load();	
 		
 		String workoutName = this.workoutHistory.getFirst().get("Name");
-		String workoutDate = this.workoutHistory.getFirst().get("Time");
+		String workoutDate = this.workoutHistory.getFirst().get("StartTime");
+		String duration = WorkoutRecord.getDuration(this.workoutHistory.getFirst().get("StartTime"),this.workoutHistory.getFirst().get("EndTime"));
 		double workoutVolume = 0;
 		int workoutSets = 0;
 
 		for (HashMap<String, String> record : this.workoutHistory) {
-			String currDate = record.get("Time");
+			String currDate = record.get("StartTime");
 			
 			if(!currDate.equals(workoutDate)) {
-				List<String> wrapUpData = List.of(workoutName, workoutDate, "None", workoutVolume + "kg", workoutSets + " sets");
+				List<String> wrapUpData = List.of(workoutName, workoutDate, duration, workoutVolume + "kg", workoutSets + " sets");
 
 				addWrapUp(root, wrapUpData);
 
 				loader = new FXMLLoader(getClass().getResource(WRAPUP_COMPONENT_PATH));
 				root = loader.load();
-				
+
 				workoutName = record.get("Name");
 				workoutDate = currDate;
+				duration =  WorkoutRecord.getDuration(record.get("StartTime"), record.get("EndTime"));
 				workoutVolume = 0;
 				workoutSets = 0;
 			}
@@ -71,7 +76,7 @@ public class WorkoutHistoryController {
 			workoutSets += 1;
 
 		}
-		List<String> wrapUpData = List.of(workoutName, workoutDate, "None", workoutVolume + "kg", workoutSets + " sets");
+		List<String> wrapUpData = List.of(workoutName, workoutDate, duration, workoutVolume + "kg", workoutSets + " sets");
 		addWrapUp(root, wrapUpData);
 		
 	}
@@ -97,7 +102,7 @@ public class WorkoutHistoryController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(WORKOUT_HEADER_COMPONENT_PATH));
 		Parent root = loader.load();
 		List<Label> headerLabels = LabelManager.getLabelsWithId(root);
-		LabelManager.addDataToLabels(headerLabels, List.of(workoutRecords.getFirst().get("Name"),workoutRecords.getFirst().get("Time")));
+		LabelManager.addDataToLabels(headerLabels, List.of(workoutRecords.getFirst().get("Name"),workoutRecords.getFirst().get("StartTime")));
 		exercisesContainer.getChildren().add(root);
 
 		String currExercise = "";
@@ -140,7 +145,7 @@ public class WorkoutHistoryController {
 	}
 	private List<HashMap<String, String>> getWorkoutRecords(String date){
 		return this.workoutHistory.stream()
-				.filter(r -> r.get("Time").equals(date))
+				.filter(r -> r.get("StartTime").equals(date))
 				.collect(Collectors.toList());
 	}
 	public void goToMainView(ActionEvent e) throws IOException{

@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,9 +114,10 @@ public class NewWorkoutController {
 			exercise.saveExercise();
 			workout.addExercise(exercise.exerciseRecord);
 		}
-		this.convertToCsv();
+		workout.endTime = LocalDateTime.now();
+		convertToCsv();
 
-		goToMainView(e);
+		new SceneLoader().loadMain(e);
 	}
 	private void convertToCsv() throws IOException{
     	FileWriter outputFile = new FileWriter("src/application/Workouts.csv", true);
@@ -124,7 +126,8 @@ public class NewWorkoutController {
 			for (SetRecord set : exercise.getSets()) {
 				writeToCsv(outputFile,
 						workout.getName(),
-						workout.getDate(),
+						workout.getStartTime(),
+						workout.getEndTime(),
 						exercise.getName(),
 						exercise.getDescription(),
 						set.getId(),

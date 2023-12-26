@@ -1,33 +1,10 @@
-Name;Time;Exercise;Description;SetNumber;Weight;Reps
-Workout 123;2023/12/15 18:52:36;Chest Dip;;1;16.0;10;
-Workout 123;2023/12/15 18:52:36;Chest Dip;;2;14.0;10;
-Workout 123;2023/12/15 18:52:36;Chest Dip;;3;12.0;10;
-Just another workout;2023/12/15 19:01:47;Pull Up;;1;0.0;10
-Just another workout;2023/12/15 19:01:47;Pull Up;;2;0.0;8
-Just another workout;2023/12/15 19:01:47;Pull Up;;3;0.0;8
-Just another workout;2023/12/15 19:01:47;Pull Up;;4;0.0;6
-Just another workout;2023/12/15 19:01:47;Chin Up;;1;0.0;6
-Just another workout;2023/12/15 19:01:47;Chin Up;;2;0.0;5
-Just another workout;2023/12/15 19:01:47;Chin Up;;3;0.0;5
-Just another workout;2023/12/15 19:01:47;Bicep Curl (Barbell);;1;30.0;12
-Just another workout;2023/12/15 19:01:47;Bicep Curl (Barbell);;2;30.0;10
-Just another workout;2023/12/15 19:01:47;Bicep Curl (Barbell);;3;30.0;8
-Just another workout;2023/12/16 17:05:39;Chest Dip;;1;20.0;10
-Just another workout;2023/12/16 17:05:39;Chest Dip;;2;20.0;10
-Just another workout;2023/12/16 17:05:39;Chest Dip;;3;15.0;10
-Workout;2023/12/25 02:01:10;Chin Up;Nootoe;1;10.0;20
-Workout;2023/12/25 02:01:10;Chin Up;Nootoe;2;10.0;20
-Workout;2023/12/25 02:01:10;Chin Up;Nootoe;3;8.0;10
-Workout;2023/12/25 02:01:10;Cable Fly;Some note;1;50.0;20
-NEw workot;2023/12/25 23:00:02;Chest Dip;;1;20.0;20
-NEw workot;2023/12/25 23:00:02;Chest Dip;;2;10.0;10
-NEw workot;2023/12/25 23:00:02;Chest Dip;;3;5.0;5
-NEw workot;2023/12/25 23:00:02;Lat Pulldown;;1;50.0;8
-NEw workot;2023/12/25 23:00:02;Lat Pulldown;;2;60.0;6
-NEw workot;2023/12/25 23:00:02;Lat Pulldown;;3;50.0;6
-Workout 456;2023/12/26 19:24;Chest Dip;;1;10.0;20;
-Workout 456;2023/12/26 19:24;Chest Dip;;2;10.0;10;
-Workout 456;2023/12/26 19:24;Chest Dip;;3;10.0;5;
-Workout 456;2023/12/26 19:24;Incline Bench Press (Dumbbells);;1;24.0;8;
-Workout 456;2023/12/26 19:24;Incline Bench Press (Dumbbells);;2;24.0;7;
-Workout 456;2023/12/26 19:24;Incline Bench Press (Dumbbells);;3;24.0;5;
+Name;StartTime;EndTime;Exercise;Description;SetNumber;Weight;Reps
+Just another workout;2023/12/26 23:38:25;2023/12/26 23:38:48;Chest Dip;;1;10.0;10;
+Just another workout;2023/12/26 23:38:25;2023/12/26 23:38:48;Chest Dip;;2;10.0;10;
+Just another workout;2023/12/26 23:38:25;2023/12/26 23:38:48;Chest Dip;;3;10.0;10;
+Just another workout;2023/12/26 23:38:25;2023/12/26 23:38:48;Ring Push Up;;1;0.0;20;
+Just another workout;2023/12/26 23:38:25;2023/12/26 23:38:48;Ring Push Up;;2;0.0;17;
+Just another workout;2023/12/26 23:38:25;2023/12/26 23:38:48;Ring Push Up;;3;0.0;14;
+Just another workout;2023/12/26 23:40:07;2023/12/26 23:40:23;Pull Up;;1;10.0;10;
+Just another workout;2023/12/26 23:40:07;2023/12/26 23:40:23;Pull Up;;2;0.0;10;
+Just another workout;2023/12/26 23:40:07;2023/12/26 23:40:23;Pull Up;;3;0.0;17;
