@@ -2,8 +2,11 @@ package application.controllers;
 
 import application.objects.ExerciseRecord;
 import application.objects.SetRecord;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,13 +18,14 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SingleExerciseController {
 	private static final String SET_COMPONENT_PATH = "/application/components/Set.fxml";
 	public ExerciseRecord exerciseRecord;
 	public List<SetController> allSets; 
 	public NewWorkoutController parent;
-	private Pane container;
+	public Pane container;
 	@FXML
 	private VBox setsContainer;
 	@FXML
@@ -54,7 +58,7 @@ public class SingleExerciseController {
 		int currentSets = Integer.parseInt(parent.totalSetsLabel.getText());
 		parent.totalSetsLabel.setText(String.valueOf(currentSets + 1));
 
-		parent.scrollDown();
+		//parent.scrollDown();
 	}
 	public void saveExercise() {
 		exerciseRecord.setDescription(descriptionField.getText());
@@ -80,4 +84,12 @@ public class SingleExerciseController {
 			((Label)set.container.getChildren().getFirst()).setText(i+1+"");
 		}
 	}
+	public void deleteExercise(){
+		parent.deleteExercise(this);
+	}
+	public void replaceExercise(ActionEvent e) throws IOException {
+		parent.showExercises(e);
+		deleteExercise();
+	}
+
 }

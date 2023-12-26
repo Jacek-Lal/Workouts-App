@@ -21,7 +21,7 @@
       </Label>
       <TextField fx:id="weightLabel" alignment="CENTER" maxWidth="75.0" onKeyTyped="#validateInput" prefHeight="28.0" prefWidth="78.0" promptText="0" style="-fx-background-color: #333; -fx-text-fill: #eee;" />
       <TextField fx:id="repsLabel" alignment="CENTER" maxWidth="50.0" onKeyTyped="#validateInput" prefHeight="28.0" prefWidth="73.0" promptText="0" style="-fx-background-color: #333; -fx-text-fill: #eee;" />
-      <Button maxWidth="30.0" mnemonicParsing="false" onAction="#removeSet" prefHeight="28.0" prefWidth="92.0" style="-fx-background-color: #333;" text="❌" textFill="#ca0000">
+      <Button maxWidth="30.0" mnemonicParsing="false" onAction="#removeSet" prefHeight="28.0" prefWidth="92.0" style="-fx-background-color: #333; -fx-border-radius: 4; -fx-background-radius: 4;" text="❌" textFill="#ca0000">
          <font>
             <Font size="8.0" />
          </font>

@@ -138,4 +138,9 @@ public class NewWorkoutController {
 		Stage owner = closeModal(e);
 		new SceneLoader().loadMain(owner);
 	}
+
+	public void deleteExercise(SingleExerciseController exercise) {
+		exercisesContainer.getChildren().remove(exercise.container);
+		exerciseControllers.remove(exercise);
+	}
 }

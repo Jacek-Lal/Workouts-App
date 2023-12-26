@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="137.0" prefWidth="346.0" style="-fx-background-color: #333;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.NewWorkoutController">
    <children>
       <Label layoutX="101.0" layoutY="24.0" text="Are you sure?" textFill="#eeeeee">
