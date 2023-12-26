@@ -13,7 +13,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +22,7 @@ public class WorkoutHistoryController {
 	private static final String WRAPUP_COMPONENT_PATH = COMPONENTS_PATH + "WorkoutWrapUp.fxml";
 	private static final String EXERCISE_COMPONENT_PATH = COMPONENTS_PATH + "ExerciseFromHistory.fxml";
 	private static final String SET_COMPONENT_PATH = COMPONENTS_PATH + "SetFromHistory.fxml";
+	private static final String WORKOUT_HEADER_COMPONENT_PATH = COMPONENTS_PATH + "WorkoutHeader.fxml";
 
 	private final List<HashMap<String, String>> workoutHistory;
 	
@@ -94,8 +94,12 @@ public class WorkoutHistoryController {
 	private void openWorkout(List<HashMap<String, String>> workoutRecords) throws IOException {
 		exercisesContainer.getChildren().clear();
 		
-		FXMLLoader loader;
-		Parent root;	
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(WORKOUT_HEADER_COMPONENT_PATH));
+		Parent root = loader.load();
+		List<Label> headerLabels = LabelManager.getLabelsWithId(root);
+		LabelManager.addDataToLabels(headerLabels, List.of(workoutRecords.getFirst().get("Name"),workoutRecords.getFirst().get("Time")));
+		exercisesContainer.getChildren().add(root);
+
 		String currExercise = "";
 		VBox setsContainer = null;
 
@@ -106,11 +110,19 @@ public class WorkoutHistoryController {
 				
 				loader = new FXMLLoader(getClass().getResource(EXERCISE_COMPONENT_PATH));
 				root = loader.load();
-				
+
+				VBox box = (VBox) ((Pane) root).getChildren().getLast();
+				Label descLabel = (Label) box.getChildren().getFirst();
+				setsContainer =(VBox) ((ScrollPane) box.getChildren().getLast()).getContent();
+
 				List<Label> labels = LabelManager.getLabelsWithId(root);
-				LabelManager.addDataToLabels(labels, Arrays.asList(record.get("Name"),record.get("Time"),record.get("Description"),record.get("Exercise")));
-				setsContainer = (VBox)((ScrollPane)((Pane)root).getChildren().getLast()).getContent();
-				
+				if(record.get("Description").isEmpty())
+					box.getChildren().remove(descLabel);
+				else
+					labels.add(descLabel);
+
+				LabelManager.addDataToLabels(labels, List.of(record.get("Exercise"), record.get("Description")));
+
 				exercisesContainer.getChildren().add(root);
 			}
 					
@@ -119,7 +131,7 @@ public class WorkoutHistoryController {
 				Parent set = setLoader.load();
 				
 				List<Label> labels = LabelManager.getLabelsWithId(set);
-				LabelManager.addDataToLabels(labels, Arrays.asList(record.get("SetNumber"), record.get("Weight")+"kg", record.get("Reps")+" reps"));
+				LabelManager.addDataToLabels(labels, List.of(record.get("SetNumber"), record.get("Weight")+"kg x "+record.get("Reps")+" reps"));
 
                 assert setsContainer != null;
                 setsContainer.getChildren().add(set);

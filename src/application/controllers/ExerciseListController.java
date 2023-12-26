@@ -141,8 +141,11 @@ public class ExerciseListController {
 	}
 	private List<HashMap<String, String>> getFilteredExercises() {
 		return this.exerciseList.stream()
-				.filter(r -> this.activeMuscleFilter.isEmpty() || r.get("Primary Muscle").equals(this.activeMuscleFilter))
-				.filter(r -> this.activeEquipmentFilter.isEmpty() || r.get("Equipment").equals(this.activeEquipmentFilter))
+				.filter(r -> this.activeMuscleFilter.isEmpty() ||
+						r.get("Primary Muscle").equals(this.activeMuscleFilter) ||
+						r.get("Secondary Muscle").equals(this.activeMuscleFilter))
+				.filter(r -> this.activeEquipmentFilter.isEmpty() ||
+						r.get("Equipment").equals(this.activeEquipmentFilter))
 				.filter(r -> r.get("Name").toLowerCase().contains(this.searchBar.getText().toLowerCase()))
 				.collect(Collectors.toList());
 		

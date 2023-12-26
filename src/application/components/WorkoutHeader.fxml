@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="400.0" style="-fx-background-color: #222;" styleClass="exerciseNote" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.ExerciseDetailsController">
+   <children>
+      <Label fx:id="workoutName" layoutX="26.0" layoutY="14.0" text="Workout Name" textFill="#eeeeee">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="workoutDate" layoutX="26.0" layoutY="50.0" text="Workout date" textFill="#ededed93">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+   </children>
+   <padding>
+      <Insets bottom="10.0" />
+   </padding>
+</Pane>

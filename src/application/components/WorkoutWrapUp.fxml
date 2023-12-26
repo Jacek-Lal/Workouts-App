@@ -21,7 +21,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="volume" layoutX="113.0" layoutY="70.0" prefHeight="25.0" prefWidth="56.0" text="5192kg" textFill="#eeeeee">
+      <Label fx:id="volume" alignment="CENTER" layoutX="104.0" layoutY="70.0" prefHeight="25.0" prefWidth="74.0" text="5192kg" textFill="#eeeeee">
          <font>
             <Font size="16.0" />
          </font>

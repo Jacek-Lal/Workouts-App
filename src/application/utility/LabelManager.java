@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LabelManager {
     public static void addDataToLabels(List<Label> labels, List<String> data){
@@ -17,7 +18,7 @@ public class LabelManager {
                 .stream()
                 .filter(l-> l.getId() != null)
                 .map(l -> (Label)l)
-                .toList();
+                .collect(Collectors.toList());
     }
 
 }

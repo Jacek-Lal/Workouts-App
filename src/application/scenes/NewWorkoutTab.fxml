@@ -54,7 +54,7 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <ScrollPane fx:id="exercisesScrollPane" hbarPolicy="NEVER" hmin="10.0" hvalue="10.0" layoutX="359.0" layoutY="49.0" prefHeight="451.0" prefWidth="434.0" style="-fx-background-color: #333;" vbarPolicy="NEVER">
+      <ScrollPane fx:id="exercisesScrollPane" hbarPolicy="NEVER" hmin="10.0" hvalue="10.0" layoutX="359.0" layoutY="50.0" prefHeight="451.0" prefWidth="434.0" style="-fx-background-color: #333;" vbarPolicy="NEVER">
          <content>
             <VBox fx:id="exercisesContainer" prefHeight="451.0" prefWidth="433.0" style="-fx-background-color: #222;" />
          </content>

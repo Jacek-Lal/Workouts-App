@@ -21,6 +21,7 @@ public class ExerciseDetailsController{
 	private static final String EXERCISE_SUMMARY_COMPONENT_PATH = "/application/components/" + "ExerciseSummary.fxml";
 	private static final String EXERCISE_HISTORY_COMPONENT_PATH = "/application/components/" + "ExerciseFromHistory.fxml";
 	private static final String SET_HISTORY_COMPONENT_PATH = "/application/components/" + "SetFromHistory.fxml";
+	private static final String WORKOUT_HEADER_COMPONENT_PATH = "/application/components/" + "WorkoutHeader.fxml";
 	private String exerciseName;
 	private boolean summaryView;
 	private List<HashMap<String, String>> currentExerciseRecords;
@@ -69,8 +70,8 @@ public class ExerciseDetailsController{
 			return;
 		}
 
-		FXMLLoader loader;
-		Parent root;	
+		FXMLLoader exerciseLoader;
+		Parent exercise;
 		String currDate = "";
 		VBox setsContainer = null;
 
@@ -78,26 +79,33 @@ public class ExerciseDetailsController{
 			
 			if(!currDate.equals(record.get("Time"))) {
 				currDate = record.get("Time");
+
+
+				FXMLLoader headerLoader = new FXMLLoader(getClass().getResource(WORKOUT_HEADER_COMPONENT_PATH));
+				Parent header = headerLoader.load();
+				List<Label> headerLabels = LabelManager.getLabelsWithId(header);
+				LabelManager.addDataToLabels(headerLabels, List.of(record.get("Name"),record.get("Time")));
+
+				exerciseLoader = new FXMLLoader(getClass().getResource(EXERCISE_HISTORY_COMPONENT_PATH));
+				exercise = exerciseLoader.load();
+
+				List<Label> exerciseLabels = LabelManager.getLabelsWithId(exercise);
+				LabelManager.addDataToLabels(exerciseLabels, List.of(record.get("Exercise"),record.get("Description")));
+				setsContainer = (VBox)((ScrollPane)((Pane)exercise).getChildren().getLast()).getContent();
 				
-				loader = new FXMLLoader(getClass().getResource(EXERCISE_HISTORY_COMPONENT_PATH));
-				root = loader.load();
-				
-				List<Label> labels = LabelManager.getLabelsWithId(root);
-				LabelManager.addDataToLabels(labels, List.of(record.get("Name"),record.get("Time"),record.get("Exercise"),record.get("Description")));
-				setsContainer = (VBox)((ScrollPane)((Pane)root).getChildren().getLast()).getContent();
-				
-				detailsContainer.getChildren().addFirst(root);
+				detailsContainer.getChildren().addFirst(exercise);
+				detailsContainer.getChildren().addFirst(header);
 			}
 			if(currDate.equals(record.get("Time"))) {
 				FXMLLoader setLoader = new FXMLLoader(getClass().getResource(SET_HISTORY_COMPONENT_PATH));
 				Parent set = setLoader.load();
 				
 				List<Label> labels = LabelManager.getLabelsWithId(set);
-				LabelManager.addDataToLabels(labels, List.of(record.get("SetNumber"), record.get("Weight")+"kg", record.get("Reps")+" reps"));
+				LabelManager.addDataToLabels(labels, List.of(record.get("SetNumber"), record.get("Weight")+"kg x " + record.get("Reps")+" reps"));
 
                 assert setsContainer != null;
                 setsContainer.getChildren().add(set);
-			}	
+			}
 		}
 		
 	}
