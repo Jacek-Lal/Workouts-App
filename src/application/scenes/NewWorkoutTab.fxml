@@ -13,7 +13,7 @@
    <children>
       <Pane prefHeight="600.0" prefWidth="265.0" style="-fx-background-color: #222;" styleClass=".side_pane">
          <children>
-            <Button id="finishWorkoutButton" layoutX="93.0" layoutY="450.0" mnemonicParsing="false" onAction="#saveWorkout" prefHeight="80.0" prefWidth="80.0" text="Save" textFill="#eeeeee">
+            <Button id="finishWorkoutButton" layoutX="34.0" layoutY="511.0" mnemonicParsing="false" onAction="#saveWorkout" prefHeight="43.0" prefWidth="100.0" style="-fx-background-radius: 8;" text="Save" textFill="#eeeeee">
                <font>
                   <Font size="20.0" />
                </font>
@@ -47,6 +47,15 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <Button id="finishWorkoutButton" layoutX="139.0" layoutY="511.0" mnemonicParsing="false" onAction="#discardWorkout" prefHeight="43.0" prefWidth="100.0" style="-fx-background-radius: 8; -fx-background-color: #222; -fx-border-color: #a60303; -fx-border-radius: 8;" text="Discard" textFill="#a60303">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="buttonPurple" />
+                  <String fx:value="button" />
+               </styleClass>
+            </Button>
          </children>
       </Pane>
       <Button fx:id="addExerciseButton" layoutX="416.0" layoutY="521.0" mnemonicParsing="false" onAction="#showExercises" prefHeight="38.0" prefWidth="320.0" styleClass="button-ok" text="Add exercise" textFill="#eeeeee">

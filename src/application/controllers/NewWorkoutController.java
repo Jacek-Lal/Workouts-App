@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 public class NewWorkoutController {
 	private static final String EXERCISE_LIST_SCENE_PATH = "/application/scenes/" + "ExercisesList.fxml";
 	private static final String EXERCISE_COMPONENT_PATH = "/application/components/"+ "Exercise.fxml";
+	private static final String MODAL_COMPONENT_PATH = "/application/components/"+ "WorkoutCloseModal.fxml";
 	private WorkoutRecord workout;
 	private List<SingleExerciseController> exerciseControllers;
 	@FXML
@@ -83,7 +84,7 @@ public class NewWorkoutController {
 		}
 		this.convertToCsv();
 
-		new SceneLoader().loadMain(e);
+		goToMainView(e);
 	}
 	private void convertToCsv() throws IOException{
     	FileWriter outputFile = new FileWriter("src/application/Workouts.csv", true);
@@ -114,5 +115,27 @@ public class NewWorkoutController {
 		exercisesScrollPane.applyCss();
 		exercisesScrollPane.layout();
 		exercisesScrollPane.setVvalue(exercisesScrollPane.getVmax());
+	}
+	public void discardWorkout(ActionEvent e) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(MODAL_COMPONENT_PATH));
+		Parent root = loader.load();
+		Scene scene = new Scene(root);
+		Stage stage = new Stage();
+
+		stage.initModality(Modality.WINDOW_MODAL);
+		stage.initOwner(((Node) e.getSource()).getScene().getWindow());
+		stage.setScene(scene);
+		stage.show();
+	}
+	public Stage closeModal(ActionEvent e){
+		Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+		Stage owner = (Stage) stage.getOwner();
+
+		stage.close();
+		return owner;
+	}
+	public void goToMainView(ActionEvent e) throws IOException {
+		Stage owner = closeModal(e);
+		new SceneLoader().loadMain(owner);
 	}
 }

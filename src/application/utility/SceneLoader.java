@@ -26,6 +26,9 @@ public class SceneLoader {
     public void loadMain(ActionEvent e) throws IOException {
         this.loadScene((Stage)((Node)e.getSource()).getScene().getWindow(), "Main");
     }
+    public void loadMain(Stage stage) throws IOException {
+        this.loadScene(stage, "Main");
+    }
     public void loadNewWorkoutModal(ActionEvent e) throws IOException {
         loadScene((Stage)((Node)e.getSource()).getScene().getWindow(), "NewWorkoutModal");
     }
