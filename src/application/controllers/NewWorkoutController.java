@@ -1,9 +1,5 @@
 package application.controllers;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import application.objects.ExerciseRecord;
 import application.objects.SetRecord;
 import application.objects.WorkoutRecord;
@@ -16,20 +12,32 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class NewWorkoutController {
 	private static final String EXERCISE_LIST_SCENE_PATH = "/application/scenes/" + "ExercisesList.fxml";
 	private static final String EXERCISE_COMPONENT_PATH = "/application/components/"+ "Exercise.fxml";
 	private static final String MODAL_COMPONENT_PATH = "/application/components/"+ "WorkoutCloseModal.fxml";
 	private WorkoutRecord workout;
+	private LocalTime duration;
 	private List<SingleExerciseController> exerciseControllers;
 	@FXML
 	private Label workoutNameLabel;
+	@FXML
+	public TextField durationField;
 	@FXML
 	public Label totalWeightLabel;
 	@FXML
@@ -38,15 +46,38 @@ public class NewWorkoutController {
 	public ScrollPane exercisesScrollPane;
 	@FXML
 	public VBox exercisesContainer;
-	
-	@FXML
-	public void initialize() {
+
+	public void setup(String name){
 		this.exerciseControllers = new ArrayList<>();
 		this.workout = new WorkoutRecord();
-	}
-	public void setWorkoutName(String name) {
+		this.duration = LocalTime.of(0,0,0);
 		this.workoutNameLabel.setText(name);
 		this.workout.setName(name);
+		startTimer();
+	}
+	public void startTimer(){
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				updateTimer();
+			}
+		}, 0, 1000);
+	}
+	public void updateTimer(){
+
+		StringBuilder formattedTime = new StringBuilder();
+		duration = duration.plusSeconds(1);
+
+		if (duration.getHour() > 0) {
+			formattedTime.append(duration.getHour()).append("h ");
+		}
+		if(duration.getMinute() > 0){
+			formattedTime.append(duration.getMinute()).append("min ");
+		}
+		formattedTime.append(duration.getSecond()).append("s");
+
+		durationField.setText(formattedTime.toString());
 	}
 	public void showExercises(ActionEvent e) throws IOException{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(EXERCISE_LIST_SCENE_PATH));

@@ -5,15 +5,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class WorkoutRecord {
-	private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");;
+	private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
 	
 	private String name;
-	private final String date;
+	public final LocalDateTime date;
 	private final ArrayList<ExerciseRecord> exercises;
 
 	public WorkoutRecord() {
 		this.name = "";
-		this.date = LocalDateTime.now().format(dtf);
+		this.date = LocalDateTime.now();
 		this.exercises = new ArrayList<>();
 	}
 	public void setName(String name) {
@@ -23,7 +23,7 @@ public class WorkoutRecord {
 		return this.name;
 	}
 	public String getDate() {
-		return this.date;
+		return this.date.format(dtf);
 	}
 	public void addExercise(ExerciseRecord exercise){
 		this.exercises.add(exercise);

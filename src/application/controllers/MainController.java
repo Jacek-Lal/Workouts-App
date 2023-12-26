@@ -30,6 +30,6 @@ public class MainController {
 		String name = this.workoutName.getText();
 
 		if(name.isEmpty()) name = "Just another workout";
-		controller.setWorkoutName(name);
+		controller.setup(name);
 	}
 }
