@@ -18,10 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SingleExerciseController {
-	private static final String SET_COMPONENT_PATH = "/application/components/Set.fxml";
-	public ExerciseRecord exerciseRecord;
+    public ExerciseRecord exerciseRecord;
 	public List<SetController> allSets; 
 	public NewWorkoutController parent;
+	public List<String> exerciseData;
 	public Pane container;
 	@FXML
 	private VBox setsContainer;
@@ -29,19 +29,27 @@ public class SingleExerciseController {
 	private TextField descriptionField;
 	@FXML
 	private Label exerciseName;
+	@FXML
+	private HBox setHeader;
 
-    public void setup(NewWorkoutController parent, Pane container, String exerciseName) throws IOException {
+    public void setup(NewWorkoutController parent, Pane container, List<String> exerciseData) throws IOException {
 		this.parent = parent;
 		this.container = container;
-
+		this.exerciseData = exerciseData;
 		this.allSets = new ArrayList<>();
-		this.exerciseRecord = new ExerciseRecord(exerciseName);
-		this.exerciseName.setText(exerciseName);
-		
+		this.exerciseRecord = new ExerciseRecord(exerciseData.getFirst());
+		this.exerciseName.setText(exerciseData.getFirst());
+
+		if(exerciseData.getLast().equals("Bodyweight"))
+			setHeader.getChildren().remove(2);
+
 		addSet();
 	}
-	public void addSet() throws IOException{		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(SET_COMPONENT_PATH));
+	public void addSet() throws IOException{
+        String SET_COMPONENT = "/application/components/";
+		SET_COMPONENT += (exerciseData.getLast().equals("Bodyweight")) ? "BodyweightSet.fxml" : "Set.fxml";
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(SET_COMPONENT));
 		Parent root = loader.load();
 		SetController controller = loader.getController();
 		controller.setup(this, (HBox)root,allSets.size() + 1);

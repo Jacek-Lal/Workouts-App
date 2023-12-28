@@ -47,7 +47,7 @@ public class ExerciseDetailsController{
 		Parent root = loader.load();	
 		
 		List<Label> labels = LabelManager.getLabelsWithId(root);
-		LabelManager.addDataToLabels(labels, this.summaryData);
+		LabelManager.addData(labels, this.summaryData);
 
 		detailsContainer.getChildren().add(root);
 		
@@ -82,7 +82,7 @@ public class ExerciseDetailsController{
 				FXMLLoader headerLoader = new FXMLLoader(getClass().getResource(WORKOUT_HEADER_COMPONENT_PATH));
 				Parent header = headerLoader.load();
 				List<Label> headerLabels = LabelManager.getLabelsWithId(header);
-				LabelManager.addDataToLabels(headerLabels, List.of(record.get("Name"),record.get("StartTime")));
+				LabelManager.addData(headerLabels, List.of(record.get("Name"),record.get("StartTime")));
 
 				exerciseLoader = new FXMLLoader(getClass().getResource(EXERCISE_HISTORY_COMPONENT_PATH));
 				exercise = exerciseLoader.load();
@@ -97,7 +97,7 @@ public class ExerciseDetailsController{
 				else
 					exerciseLabels.add(descLabel);
 
-				LabelManager.addDataToLabels(exerciseLabels, List.of(record.get("Exercise"),record.get("Description")));
+				LabelManager.addData(exerciseLabels, List.of(record.get("Exercise"),record.get("Description")));
 
 				detailsContainer.getChildren().addFirst(exercise);
 				detailsContainer.getChildren().addFirst(header);
@@ -107,7 +107,7 @@ public class ExerciseDetailsController{
 				Parent set = setLoader.load();
 				
 				List<Label> labels = LabelManager.getLabelsWithId(set);
-				LabelManager.addDataToLabels(labels, List.of(record.get("SetNumber"), record.get("Weight")+"kg x " + record.get("Reps")+" reps"));
+				LabelManager.addData(labels, List.of(record.get("SetNumber"), record.get("Weight")+"kg x " + record.get("Reps")+" reps"));
 
                 assert setsContainer != null;
                 setsContainer.getChildren().add(set);

@@ -1,6 +1,7 @@
 package application.controllers;
 
 import application.utility.CsvLoader;
+import application.utility.LabelManager;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -53,9 +54,9 @@ public class ExerciseListController {
 	}
 	public void chooseExercise(MouseEvent e) throws IOException{
 		Pane exercise = ((Pane)e.getSource());
-		String exerciseName = ((Label)exercise.getChildren().getFirst()).getText();
+		List<String> exerciseData = LabelManager.getData(LabelManager.getLabelsWithId(exercise));
 
-		parent.addExercise(exerciseName);
+		parent.addExercise(exerciseData);
 		stage.close();
 	}
 	protected void showExercises() throws IOException {

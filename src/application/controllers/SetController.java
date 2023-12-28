@@ -27,7 +27,7 @@ public class SetController {
 		this.id = id;
 		this.weight = 0;
 		this.reps = 0;
-		
+
 		setIdLabel.setText(Integer.toString(id));
 	}
 	public void validateInput(KeyEvent e) {
@@ -51,7 +51,6 @@ public class SetController {
 				return;
 			}
 		}
-		
 		updateTotalVolume();
 	}
 	public void updateTotalVolume()  {
@@ -60,7 +59,7 @@ public class SetController {
 		double totalVolume = Double.parseDouble(totalVolumeLabel.getText()) - this.getSetVolume();
 		
 		// Get updated weight/reps
-		String weight_ = this.weightLabel.getText();
+		String weight_ = this.weightLabel != null ? this.weightLabel.getText() : "";
 		String reps_ = this.repsLabel.getText();
 		
 		if(weight_.isEmpty()) weight_ = "0.0";

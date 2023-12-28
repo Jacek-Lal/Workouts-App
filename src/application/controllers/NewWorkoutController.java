@@ -96,13 +96,13 @@ public class NewWorkoutController {
 		
 		stage.show();	
 	}
-	public void addExercise(String exerciseName) throws IOException{
+	public void addExercise(List<String> exerciseData) throws IOException{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(EXERCISE_COMPONENT_PATH));
 		Parent root = loader.load();	
 		SingleExerciseController controller = loader.getController();
-		
+
 		VBox.setVgrow(root, Priority.ALWAYS);
-		controller.setup(this,(Pane)root, exerciseName);
+		controller.setup(this,(Pane)root, exerciseData);
 		
 		exerciseControllers.add(controller);
 		exercisesContainer.getChildren().add(root);
