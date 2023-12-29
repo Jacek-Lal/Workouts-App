@@ -19,8 +19,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -115,35 +115,29 @@ public class NewWorkoutController {
 			workout.addExercise(exerciseRecord);
 		}
 		workout.endTime = LocalDateTime.now();
-		convertToCsv();
+		writeToDatabase();
 
 		new SceneLoader().loadMain(e);
 	}
-	private void convertToCsv() throws IOException{
-    	FileWriter outputFile = new FileWriter("src/application/Workouts.csv", true);
+	private void writeToDatabase(){
+		String url = "jdbc:sqlite:src/application/data.sqlite";
 
-		for(ExerciseRecord exercise : workout.getExercises()) {
-			for (SetRecord set : exercise.getSets()) {
-				writeToCsv(outputFile,
-						workout.getName(),
-						workout.getStartTime(),
-						workout.getEndTime(),
-						exercise.getName(),
-						exercise.getDescription(),
-						set.getId(),
-						set.getWeight(),
-						set.getReps());
+		try(Connection connection = DriverManager.getConnection(url)){
+			for (ExerciseRecord exercise : workout.getExercises()){
+				for (SetRecord set : exercise.getSets()){
+					PreparedStatement statement = connection.prepareStatement("INSERT INTO WORKOUTS VALUES (?,?,?,?,?,?,?,?)");
+
+					List<String> data = List.of(workout.getName(), workout.getStartTime(), workout.getEndTime(), exercise.getName(), exercise.getDescription(), set.getId(), set.getWeight(), set.getReps());
+					for (int i = 1; i < data.size() + 1; i++)
+						statement.setString(i, data.get(i-1));
+
+					statement.executeUpdate();
+				}
 			}
 		}
-		outputFile.flush();
-		outputFile.close();
-	}
-	private void writeToCsv(FileWriter outputFile, String... values) throws IOException {
-		for(String value : values){
-			outputFile.append(value);
-			outputFile.append(";");
+		catch (SQLException e){
+			e.printStackTrace();
 		}
-		outputFile.append("\n");
 	}
 	public void scrollDown() {
 		exercisesScrollPane.applyCss();
