@@ -1,7 +1,7 @@
 package application.controllers;
 
 import application.objects.WorkoutRecord;
-import application.utility.CsvLoader;
+import application.utility.DataLoader;
 import application.utility.LabelManager;
 import application.utility.SceneLoader;
 import javafx.event.ActionEvent;
@@ -34,7 +34,7 @@ public class WorkoutHistoryController {
 	private VBox exercisesContainer;
 	
 	public WorkoutHistoryController() {
-		this.workoutHistory = CsvLoader.loadWorkouts();
+		this.workoutHistory = DataLoader.loadWorkouts();
 	}
 	@FXML
 	public void initialize() throws IOException {

@@ -150,7 +150,7 @@ public class NewWorkoutController {
 		exercisesScrollPane.layout();
 		exercisesScrollPane.setVvalue(exercisesScrollPane.getVmax());
 	}
-	public void discardWorkout(ActionEvent e) throws IOException {
+	public void openModal(ActionEvent e) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(MODAL_COMPONENT_PATH));
 		Parent root = loader.load();
 		Scene scene = new Scene(root);

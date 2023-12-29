@@ -48,7 +48,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button id="finishWorkoutButton" layoutX="139.0" layoutY="511.0" mnemonicParsing="false" onAction="#discardWorkout" prefHeight="43.0" prefWidth="100.0" style="-fx-background-radius: 8; -fx-background-color: #222; -fx-border-color: #a60303; -fx-border-radius: 8;" text="Discard" textFill="#a60303">
+            <Button id="finishWorkoutButton" layoutX="139.0" layoutY="511.0" mnemonicParsing="false" onAction="#openModal" prefHeight="43.0" prefWidth="100.0" style="-fx-background-radius: 8; -fx-background-color: #222; -fx-border-color: #a60303; -fx-border-radius: 8;" text="Discard" textFill="#a60303">
                <font>
                   <Font size="20.0" />
                </font>

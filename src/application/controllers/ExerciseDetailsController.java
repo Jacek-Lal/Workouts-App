@@ -1,6 +1,6 @@
 package application.controllers;
 
-import application.utility.CsvLoader;
+import application.utility.DataLoader;
 import application.utility.LabelManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -126,7 +126,7 @@ public class ExerciseDetailsController{
 		
 	}
 	private List<HashMap<String, String>> getCurrentExerciseRecords(){
-		List<HashMap<String, String>> workoutHistory = CsvLoader.loadWorkouts();
+		List<HashMap<String, String>> workoutHistory = DataLoader.loadWorkouts();
 
 		return workoutHistory.stream()
 				.filter(record -> record.get("Exercise").equals(this.exerciseName))

@@ -1,6 +1,6 @@
 package application.controllers;
 
-import application.utility.CsvLoader;
+import application.utility.DataLoader;
 import application.utility.LabelManager;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -42,7 +42,7 @@ public class ExerciseListController {
 	private GridPane exercisesGrid;
 	
 	public ExerciseListController() {
-		this.exerciseList = CsvLoader.loadExercises();
+		this.exerciseList = DataLoader.loadExercises();
 		this.activeEquipmentFilter = "";
 		this.activeMuscleFilter = "";
 	}
