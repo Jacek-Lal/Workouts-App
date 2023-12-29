@@ -1,10 +1,13 @@
 package application.controllers;
 
+import application.objects.SetRecord;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+
+import java.util.Set;
 
 public class SetController {
 	private int id;
@@ -72,7 +75,11 @@ public class SetController {
 		double newVolume = totalVolume + this.getSetVolume();
 		this.totalVolumeLabel.setText(String.valueOf(newVolume));
 	}
+	public SetRecord saveSet(){
+		if(this.reps == 0 || (this.weight == 0) && !parent.exerciseType.equals("Bodyweight")) return null;
 
+		return new SetRecord(this.id, this.weight, this.reps);
+	}
 	public void removeSet(){
 		// Update total workout volume
 		double totalVolume = Double.parseDouble(totalVolumeLabel.getText());
@@ -83,7 +90,5 @@ public class SetController {
 	}
 	public void setId(int id){this.id = id;}
 	public int getId() {return this.id;}
-	public double getWeight() {return this.weight;}
-	public int getReps() {return this.reps;}
 	public double getSetVolume() {return this.weight*this.reps;}
 }

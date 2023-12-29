@@ -29,7 +29,7 @@
                <content>
                   <VBox fx:id="setsContainer" prefWidth="350.0" spacing="5.0" style="-fx-background-color: #222;">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="306.0" spacing="50.0">
+                        <HBox fx:id="setHeader" alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="306.0" spacing="50.0">
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" minWidth="20.0" prefHeight="25.0" prefWidth="28.0" text="Set" textAlignment="CENTER" textFill="#eeeeee">
                                  <font>

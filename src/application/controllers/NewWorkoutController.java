@@ -111,8 +111,8 @@ public class NewWorkoutController {
 	}
 	public void saveWorkout(ActionEvent e) throws IOException {
 		for (SingleExerciseController exercise : exerciseControllers) {
-			exercise.saveExercise();
-			workout.addExercise(exercise.exerciseRecord);
+			ExerciseRecord exerciseRecord = exercise.saveExercise();
+			workout.addExercise(exerciseRecord);
 		}
 		workout.endTime = LocalDateTime.now();
 		convertToCsv();

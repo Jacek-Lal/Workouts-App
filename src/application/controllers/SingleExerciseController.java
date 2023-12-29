@@ -18,11 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SingleExerciseController {
-    public ExerciseRecord exerciseRecord;
-	public List<SetController> allSets; 
+	public List<SetController> allSets;
 	public NewWorkoutController parent;
 	public List<String> exerciseData;
 	public Pane container;
+	public String exerciseType;
+
 	@FXML
 	private VBox setsContainer;
 	@FXML
@@ -37,10 +38,10 @@ public class SingleExerciseController {
 		this.container = container;
 		this.exerciseData = exerciseData;
 		this.allSets = new ArrayList<>();
-		this.exerciseRecord = new ExerciseRecord(exerciseData.getFirst());
 		this.exerciseName.setText(exerciseData.getFirst());
+		this.exerciseType = exerciseData.getLast();
 
-		if(exerciseData.getLast().equals("Bodyweight"))
+		if(exerciseType.equals("Bodyweight"))
 			setHeader.getChildren().remove(2);
 
 		addSet();
@@ -65,14 +66,17 @@ public class SingleExerciseController {
 
 		//parent.scrollDown();
 	}
-	public void saveExercise() {
+	public ExerciseRecord saveExercise() {
+		ExerciseRecord exerciseRecord = new ExerciseRecord(exerciseData.getFirst());
 		exerciseRecord.setDescription(descriptionField.getText());
 		
 		for(SetController set: allSets) {
-			
-			SetRecord setRecord = new SetRecord(set.getId(), set.getWeight(), set.getReps());
+			SetRecord setRecord = set.saveSet();
+			if (setRecord == null) continue;
+
 			exerciseRecord.addSet(setRecord);
 		}
+		return exerciseRecord;
 	}
 	public void removeSet(SetController set) {
 		setsContainer.getChildren().remove(set.container);

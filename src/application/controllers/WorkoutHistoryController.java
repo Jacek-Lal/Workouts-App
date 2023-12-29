@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -116,7 +117,11 @@ public class WorkoutHistoryController {
 
 				VBox box = (VBox) ((Pane) root).getChildren().getLast();
 				Label descLabel = (Label) box.getChildren().getFirst();
-				setsContainer =(VBox) ((ScrollPane) box.getChildren().getLast()).getContent();
+				setsContainer = (VBox) ((ScrollPane) box.getChildren().getLast()).getContent();
+
+				if(record.get("Weight").equals("0.0")) {
+					((Label)((HBox) setsContainer.getChildren().getFirst()).getChildren().getLast()).setText("Reps");
+                }
 
 				List<Label> labels = LabelManager.getLabelsWithId(root);
 				if(record.get("Description").isEmpty())
@@ -134,7 +139,11 @@ public class WorkoutHistoryController {
 				Parent set = setLoader.load();
 				
 				List<Label> labels = LabelManager.getLabelsWithId(set);
-				LabelManager.addData(labels, List.of(record.get("SetNumber"), record.get("Weight")+"kg x "+record.get("Reps")+" reps"));
+
+				String weight = record.get("Weight");
+				List<String> data = List.of(record.get("SetNumber"), (weight.equals("0.0") ? "" : weight+"kg x ") + record.get("Reps")+" reps");
+
+				LabelManager.addData(labels, data);
 
                 assert setsContainer != null;
                 setsContainer.getChildren().add(set);
