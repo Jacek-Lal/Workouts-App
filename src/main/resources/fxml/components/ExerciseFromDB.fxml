@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="280.0" styleClass="mainColorDark" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="14.0" prefHeight="55.0" prefWidth="189.0" style="-fx-font-size: 18;" text="Exercise Name" textAlignment="CENTER" textFill="#eeeeee" wrapText="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="15.0" layoutY="76.0" style="-fx-font-size: 15;" text="Muscles:" textFill="#eeeeee">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="15.0" layoutY="109.0" style="-fx-font-size: 15;" text="Type: " textFill="#eeeeee">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <HBox layoutX="83.0" layoutY="76.0" prefHeight="22.0" prefWidth="189.0" spacing="10.0">
+         <children>
+            <Label fx:id="primaryMuscle" prefHeight="21.0" style="-fx-font-size: 15;" text="1st" textFill="#eeeeee">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="secondaryMuscle" prefHeight="21.0" style="-fx-font-size: 15;" text="2nd" textFill="#eeeeee">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Label fx:id="type" layoutX="83.0" layoutY="109.0" prefHeight="21.0" prefWidth="90.0" style="-fx-font-size: 15;" text="type" textFill="#eeeeee">
+         <font>
+            <Font name="System Italic" size="13.0" />
+         </font>
+      </Label>
+   </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+</Pane>

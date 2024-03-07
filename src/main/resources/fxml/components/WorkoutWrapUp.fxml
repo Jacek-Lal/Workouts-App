@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="105.0" prefWidth="300.0" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="name" alignment="TOP_LEFT" layoutX="14.0" layoutY="10.0" prefHeight="50.0" prefWidth="119.0" styleClass="fontStyle" text="Workout name" textFill="#eeeeee" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="date" alignment="CENTER_RIGHT" layoutX="150.0" layoutY="14.0" prefHeight="19.0" prefWidth="132.0" style="-fx-opacity: 0.5; -fx-font-size: 13;" styleClass="fontStyle" text="Workout date" textFill="#999999">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <padding>
+            <Insets right="5.0" />
+         </padding>
+      </Label>
+      <Label fx:id="time" contentDisplay="CENTER" layoutX="14.0" layoutY="70.0" prefHeight="25.0" prefWidth="63.0" style="-fx-font-size: 16;" styleClass="fontStyle" text="0h 00m" textAlignment="CENTER" textFill="#eeeeee">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="volume" alignment="CENTER" layoutX="113.0" layoutY="70.0" prefHeight="25.0" prefWidth="74.0" styleClass="fontStyle" text="5192kg" textFill="#eeeeee">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="sets" layoutX="227.0" layoutY="70.0" prefHeight="25.0" prefWidth="56.0" styleClass="fontStyle" text="22 sets" textFill="#eeeeee">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+   </children>
+   <styleClass>
+      <String fx:value="mainColorLight" />
+      <String fx:value="workoutWrapUp" />
+      <String fx:value="fontStyle" />
+   </styleClass>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+</Pane>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="detailsContentPane" prefHeight="490.0" prefWidth="400.0" styleClass="mainColorDark" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="9.0" layoutY="14.0" style="-fx-font-size: 20;" text="Heaviest Weight" textFill="#eeeeee">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="310.0" layoutY="14.0" style="-fx-font-size: 20;" text="Best 1RM" textFill="#eeeeee">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="heaviestWeightLabel" layoutX="9.0" layoutY="49.0" prefHeight="27.0" prefWidth="83.0" style="-fx-text-fill: #364fc7; -fx-font-size: 22; -fx-font-weight: 800;" text="Label" textFill="#7f74ab">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="bestRmLabel" alignment="CENTER_RIGHT" layoutX="299.0" layoutY="49.0" prefHeight="32.0" prefWidth="94.0" style="-fx-text-fill: #364fc7; -fx-font-size: 22; -fx-font-weight: 800;" text="Label" textFill="#7f74ab">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="9.0" layoutY="100.0" style="-fx-font-size: 20;" text="Best Set Volume" textFill="#eeeeee">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="210.0" layoutY="100.0" style="-fx-font-size: 20;" text="Best Session Volume" textFill="#eeeeee">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="bestSetVolLabel" layoutX="9.0" layoutY="132.0" prefHeight="32.0" prefWidth="108.0" style="-fx-text-fill: #364fc7; -fx-font-size: 22; -fx-font-weight: 800;" text="Label" textFill="#7f74ab">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="bestSessVolLabel" alignment="CENTER_RIGHT" layoutX="285.0" layoutY="132.0" prefHeight="32.0" prefWidth="108.0" style="-fx-text-fill: #364fc7; -fx-font-size: 22; -fx-font-weight: 800;" text="Label" textFill="#7f74ab">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <LineChart layoutY="182.0" prefHeight="308.0" prefWidth="400.0" style="-fx-stroke: #343a40;">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+         <styleClass>
+            <String fx:value="bar-chart" />
+            <String fx:value="chart-plot-background" />
+            <String fx:value="chart-content" />
+         </styleClass>
+      </LineChart>
+   </children>
+</Pane>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?> -->
+
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" styleClass="mainColorLight" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projects.workoutsapp.controllers.MainController">
+   <children>
+      <AnchorPane fx:id="menuContainer" prefHeight="768.0" prefWidth="300.0" />
+      <AnchorPane fx:id="sceneContainer" layoutX="301.0" prefHeight="768.0" prefWidth="1066.0" styleClass="mainColorLight" />
+   </children>
+</AnchorPane>

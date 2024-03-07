@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="480.0" styleClass="mainColorDark" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projects.workoutsapp.controllers.SingleExerciseController">
+   <children>
+      <Label fx:id="exerciseName" layoutX="30.0" layoutY="22.0" style="-fx-font-size: 22;" styleClass="fontStyle" text="Exercise Name" textFill="#eeeeee">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="descriptionField" layoutX="30.0" layoutY="69.0" prefHeight="26.0" prefWidth="340.0" promptText="Add notes here..." style="-fx-font-size: 12;">
+         <font>
+            <Font size="11.0" />
+         </font>
+         <styleClass>
+            <String fx:value="fontStyle" />
+            <String fx:value="mainColorLight" />
+         </styleClass>
+      </TextField>
+      <Button layoutX="432.0" layoutY="14.0" mnemonicParsing="false" onAction="#deleteExercise" style="-fx-border-color: none; -fx-font-size: 14;" styleClass="mainColorLight" text="❌" textFill="RED">
+         <font>
+            <Font size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="390.0" layoutY="14.0" mnemonicParsing="false" onAction="#replaceExercise" style="-fx-border-color: none; -fx-font-size: 14;" styleClass="mainColorLight" text="🔄" textFill="#eeeeee">
+         <font>
+            <Font size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <VBox fx:id="setsContainer" layoutX="32.0" layoutY="105.0" prefHeight="71.0" prefWidth="416.0" spacing="10.0" styleClass="mainColorDark">
+         <children>
+            <HBox fx:id="setHeader" alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="306.0" spacing="60.0">
+               <children>
+                  <Label contentDisplay="CENTER" minWidth="20.0" prefHeight="25.0" style="-fx-font-size: 15;" text="Set" textAlignment="CENTER" textFill="#eeeeee">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="CENTER" minWidth="49.0" prefHeight="25.0" style="-fx-font-size: 15;" text="Previous" textAlignment="CENTER" textFill="#eeeeee">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="CENTER" minWidth="20.0" style="-fx-font-size: 15;" text="Kg" textFill="#eeeeee">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="CENTER" minWidth="20.0" prefHeight="23.0" style="-fx-font-size: 15;" text="Reps" textAlignment="CENTER" textFill="#eeeeee">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#addSet" prefHeight="28.0" prefWidth="416.0" style="-fx-background-radius: 5; -fx-font-size: 13;" styleClass="mainColorLight" text="+ Add Set" textFill="#eeeeee">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="30.0" />
+   </padding>
+</Pane>

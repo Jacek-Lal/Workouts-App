@@ -1,0 +1,77 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.bar-chart .chart-content .chart-plot-background{
+    -fx-background-color: transparent;
+}
+.line-chart .chart-content .chart-plot-background{
+    -fx-background-color: transparent;
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: #212529;
+    -fx-fill: transparent;
+
+}
+.mainColorLight{
+    -fx-background-color:  #343a40;
+}
+.mainColorDark{
+    -fx-background-color: #212529;
+}
+.mainColorBlue{
+    -fx-background-color: #364fc7;
+}
+.textBlue{
+    -fx-font-family: Roboto;
+    -fx-text-fill: #364fc7;
+}
+.menuButton{
+    -fx-font-size: 18px;
+    -fx-text-fill: #dee2e6;
+    -fx-font-family: Roboto;
+    -fx-background-color: #212529;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-text-align: left;
+}
+.menuButton:hover{
+    -fx-text-fill: #212529;
+    -fx-background-color: #dee2e6;
+}
+.menuPane{
+    -fx-background-color:  #212529;
+}
+.borderTop{
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1 0 0 0;
+}
+.borderBot{
+    -fx-border-color: #212529;
+    -fx-border-width: 0 0 3 0;
+}
+.fontStyle{
+    -fx-font-family: Roboto;
+    -fx-text-fill: #dee2e6;
+}
+.gridTile{
+    -fx-background-radius: 10;
+    -fx-margin: 10;
+    -fx-background-color:#212529;
+}
+.startWorkout{
+    -fx-background-color: #364fc7;
+    -fx-font-size: 32;
+    -fx-text-fill: #dee2e6;
+    -fx-font-family: Roboto;
+    -fx-background-radius: 12;
+}
+.favExercise{
+    -fx-background-color: #212529;
+    -fx-border-width: 2 0 0 0;
+    -fx-border-color: #343a40;
+}
+
+.workoutWrapUp{
+    -fx-font-size: 16px;
+}
+.workoutWrapUp:hover{
+    -fx-opacity: 0.5;
+}

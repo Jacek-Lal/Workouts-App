@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER" prefHeight="40.0" prefWidth="416.0" spacing="30.0" styleClass="mainColorDark" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projects.workoutsapp.controllers.SetController">
+   <children>
+      <Label fx:id="setIdLabel" alignment="CENTER" contentDisplay="CENTER" minWidth="20.0" prefHeight="25.0" prefWidth="39.0" style="-fx-font-size: 16; -fx-background-radius: 2;" text="1" textAlignment="CENTER" textFill="#eeeeee">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <styleClass>
+            <String fx:value="mainColorDark" />
+            <String fx:value="fontStyle" />
+         </styleClass>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" minWidth="53.0" prefHeight="20.0" prefWidth="68.0" style="-fx-font-size: 14;" text="-" textAlignment="CENTER" textFill="#eeeeee">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <styleClass>
+            <String fx:value="mainColorDark" />
+            <String fx:value="fontStyle" />
+         </styleClass>
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin>
+      </Label>
+      <TextField fx:id="weightLabel" alignment="CENTER" maxWidth="75.0" onKeyTyped="#validateInput" prefHeight="28.0" prefWidth="78.0" promptText="0" style="-fx-font-size: 12;">
+         <styleClass>
+            <String fx:value="mainColorLight" />
+            <String fx:value="fontStyle" />
+         </styleClass>
+         <HBox.margin>
+            <Insets left="5.0" />
+         </HBox.margin></TextField>
+      <TextField fx:id="repsLabel" alignment="CENTER" maxWidth="50.0" onKeyTyped="#validateInput" prefHeight="28.0" prefWidth="73.0" promptText="0" style="-fx-font-size: 12;">
+         <styleClass>
+            <String fx:value="mainColorLight" />
+            <String fx:value="fontStyle" />
+         </styleClass>
+         <HBox.margin>
+            <Insets left="-5.0" />
+         </HBox.margin></TextField>
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#removeSet" style="-fx-border-radius: 4; -fx-background-radius: 4; -fx-font-size: 14;" styleClass="mainColorDark" text="❌" textFill="#ca0000">
+         <font>
+            <Font size="8.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets left="15.0" />
+   </padding>
+</HBox>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="mainContainer" prefHeight="768.0" prefWidth="1066.0" styleClass="mainColorLight" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projects.workoutsapp.controllers.ExercisesController">
+   <children>
+      <TextField fx:id="searchBar" layoutX="30.0" layoutY="32.0" onKeyTyped="#handleSearchBar" prefHeight="50.0" prefWidth="276.0" promptText="Search exercise..." style="-fx-font-size: 15;">
+         <font>
+            <Font size="12.0" />
+         </font>
+         <styleClass>
+            <String fx:value="fontStyle" />
+            <String fx:value="mainColorDark" />
+         </styleClass>
+      </TextField>
+      <MenuButton fx:id="musclesFilter" alignment="CENTER" layoutX="330.0" layoutY="42.0" minWidth="120.0" mnemonicParsing="false" prefWidth="120.0" style="-fx-font-size: 14;" styleClass="mainColorBlue" text="All muscles" textAlignment="CENTER" textFill="#eeeeee">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </MenuButton>
+      <MenuButton fx:id="equipmentFilter" alignment="CENTER" layoutX="462.0" layoutY="42.0" maxWidth="127.0" minWidth="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="127.0" style="-fx-font-size: 14;" styleClass="mainColorBlue" text="All equipment" textFill="#eeeeee">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </MenuButton>
+      <ScrollPane fx:id="exercisesScrollPane" hbarPolicy="NEVER" hmin="10.0" hvalue="10.0" layoutX="30.0" layoutY="101.0" prefHeight="635.0" prefWidth="568.0" styleClass="mainColorLight" vbarPolicy="NEVER">
+         <content>
+            <GridPane fx:id="exercisesGrid" hgap="8.0" prefHeight="635.0" prefWidth="568.0" styleClass="mainColorLight" vgap="4.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <Pane fx:id="exerciseDetailsContainer" layoutX="611.0" layoutY="101.0" prefHeight="635.0" prefWidth="447.0">
+         <children>
+            <Label alignment="CENTER" layoutX="117.0" layoutY="283.0" prefHeight="35.0" prefWidth="212.0" style="-fx-font-size: 24;" styleClass="fontStyle" text="No exercise chosen" textAlignment="CENTER">
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
