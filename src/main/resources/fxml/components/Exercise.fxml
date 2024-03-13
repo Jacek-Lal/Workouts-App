@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="480.0" styleClass="mainColorDark" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projects.workoutsapp.controllers.SingleExerciseController">
+<Pane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="480.0" styleClass="mainColorDark" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projects.workoutsapp.controllers.components.SingleExerciseController">
    <children>
       <Label fx:id="exerciseName" layoutX="30.0" layoutY="22.0" style="-fx-font-size: 22;" styleClass="fontStyle" text="Exercise Name" textFill="#eeeeee">
          <font>

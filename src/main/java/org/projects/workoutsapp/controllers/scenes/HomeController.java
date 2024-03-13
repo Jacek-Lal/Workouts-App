@@ -1,5 +1,6 @@
-package org.projects.workoutsapp.controllers;
+package org.projects.workoutsapp.controllers.scenes;
 
+import org.projects.workoutsapp.controllers.MainController;
 import org.projects.workoutsapp.objects.WorkoutRecord;
 import org.projects.workoutsapp.utility.Converter;
 import org.projects.workoutsapp.utility.DataLoader;

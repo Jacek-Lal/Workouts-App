@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="sceneContainer" prefHeight="768.0" prefWidth="1066.0" styleClass="mainColorLight" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projects.workoutsapp.controllers.HomeController">
+<AnchorPane fx:id="sceneContainer" prefHeight="768.0" prefWidth="1066.0" styleClass="mainColorLight" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projects.workoutsapp.controllers.scenes.HomeController">
    <children>
       <GridPane fx:id="statsGrid" layoutX="462.0" layoutY="14.0" prefHeight="354.0" prefWidth="558.0">
          <columnConstraints>

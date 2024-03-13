@@ -1,4 +1,4 @@
-package org.projects.workoutsapp.controllers;
+package org.projects.workoutsapp.controllers.components;
 
 import org.projects.workoutsapp.objects.SetRecord;
 import javafx.fxml.FXML;

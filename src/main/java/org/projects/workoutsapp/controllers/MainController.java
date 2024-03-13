@@ -1,5 +1,7 @@
 package org.projects.workoutsapp.controllers;
 
+import org.projects.workoutsapp.controllers.scenes.MenuController;
+import org.projects.workoutsapp.controllers.scenes.NewWorkoutController;
 import org.projects.workoutsapp.utility.SceneLoader;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;

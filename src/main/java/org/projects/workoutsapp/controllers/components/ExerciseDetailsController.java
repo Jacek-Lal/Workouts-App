@@ -1,4 +1,4 @@
-package org.projects.workoutsapp.controllers;
+package org.projects.workoutsapp.controllers.components;
 
 import org.projects.workoutsapp.utility.DataLoader;
 import org.projects.workoutsapp.utility.LabelManager;

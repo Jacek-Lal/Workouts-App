@@ -1,4 +1,4 @@
-package org.projects.workoutsapp.controllers;
+package org.projects.workoutsapp.controllers.scenes;
 
 import org.projects.workoutsapp.objects.WorkoutRecord;
 import org.projects.workoutsapp.utility.DataLoader;

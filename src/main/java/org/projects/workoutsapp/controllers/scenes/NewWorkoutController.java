@@ -1,5 +1,8 @@
-package org.projects.workoutsapp.controllers;
+package org.projects.workoutsapp.controllers.scenes;
 
+import org.projects.workoutsapp.controllers.components.ExerciseListController;
+import org.projects.workoutsapp.controllers.MainController;
+import org.projects.workoutsapp.controllers.components.SingleExerciseController;
 import org.projects.workoutsapp.objects.ExerciseRecord;
 import org.projects.workoutsapp.objects.SetRecord;
 import org.projects.workoutsapp.objects.WorkoutRecord;

@@ -1,5 +1,6 @@
-package org.projects.workoutsapp.controllers;
+package org.projects.workoutsapp.controllers.scenes;
 
+import org.projects.workoutsapp.controllers.MainController;
 import org.projects.workoutsapp.utility.Converter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -35,7 +36,8 @@ public class MenuController {
         if(mainController.activeView.equals("ExercisesTab")) return;
 
         showActiveWorkout();
-        mainController.sceneLoader.loadScene("ExercisesTab");
+        ExerciseMainController controller = mainController.sceneLoader.loadScene("ExercisesTab");
+        controller.setup();
         mainController.activeView = "ExercisesTab";
     }
     public void goToWorkoutHistoryView() throws IOException {

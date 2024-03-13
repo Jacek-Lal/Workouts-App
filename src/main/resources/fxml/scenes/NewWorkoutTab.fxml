@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="mainContainer" prefHeight="768.0" prefWidth="1066.0" styleClass="mainColorLight" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projects.workoutsapp.controllers.NewWorkoutController">
+<AnchorPane id="mainContainer" prefHeight="768.0" prefWidth="1066.0" styleClass="mainColorLight" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.projects.workoutsapp.controllers.scenes.NewWorkoutController">
    <children>
       <Button fx:id="addExerciseButton" layoutX="371.0" layoutY="689.0" mnemonicParsing="false" onAction="#showExercises" prefHeight="38.0" prefWidth="320.0" style="-fx-font-size: 20;" text="Add exercise" textFill="#eeeeee">
          <font>
