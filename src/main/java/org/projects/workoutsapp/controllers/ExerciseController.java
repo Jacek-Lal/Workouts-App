@@ -1,5 +1,6 @@
 package org.projects.workoutsapp.controllers;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -20,6 +21,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 public abstract class ExerciseController {
@@ -37,61 +40,55 @@ public abstract class ExerciseController {
     @FXML
     protected GridPane exercisesGrid;
 
-    public ExerciseController() {
-        this.exerciseList = DataLoader.loadExercises();
+    @FXML
+    public void initialize() {
         this.activeEquipmentFilter = "";
         this.activeMuscleFilter = "";
-        /*
-		CompletableFuture.supplyAsync(DataLoader::loadExercises).thenAccept(exercises->{
-			this.exerciseList = exercises;
-        }).thenRun(()->{
-			try {
-				this.setFilters();
-				this.showExercises();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-		});
-		 */
-    }
 
+        CompletableFuture.supplyAsync(DataLoader::loadExercises)
+                .thenAcceptAsync(result -> {
+                    this.exerciseList = result;
+                    Platform.runLater(()->{
+                        setFilters();
+                        showExercises();
+                    });
+                });
+    }
     public abstract void chooseExercise(MouseEvent e) throws IOException;
 
-    public void setup() throws IOException {
-        System.out.println(musclesFilter + " " + equipmentFilter);
+    protected void showExercises() {
 
-        setFilters();
-        showExercises();
-    }
-    protected void showExercises() throws IOException {
         int counter = 0;
         List<HashMap<String, String>> filteredExercises = getFilteredExercises();
-
         for(HashMap<String,String> exercise : filteredExercises) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/components/ExerciseFromDB.fxml"));
+                Pane root = loader.load();
+                root.setId(Integer.toString(counter));
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/components/ExerciseFromDB.fxml"));
-            Pane root = loader.load();
-            root.setId(Integer.toString(counter));
+                root.setOnMouseClicked(e -> {
+                    try { chooseExercise(e); }
+                    catch (IOException err) { err.printStackTrace(); }
+                });
 
-            root.setOnMouseClicked(e -> {
-                try { chooseExercise(e); }
-                catch (IOException err) { err.printStackTrace(); }
-            });
+                ObservableList<Node> labels = root.getChildren();
+                Label exerciseNameLabel = ((Label) labels.get(0));
+                HBox box = ((HBox) labels.get(3));
+                Label musclePrimaryLabel = (Label) box.getChildren().getFirst();
+                Label muscleSecondaryLabel = (Label) box.getChildren().getLast();
+                Label typeLabel = ((Label) labels.get(4));
 
-            ObservableList<Node> labels = root.getChildren();
-            Label exerciseNameLabel = ((Label) labels.get(0));
-            HBox box = ((HBox) labels.get(3));
-            Label musclePrimaryLabel = (Label) box.getChildren().getFirst();
-            Label muscleSecondaryLabel = (Label) box.getChildren().getLast();
-            Label typeLabel = ((Label) labels.get(4));
+                exerciseNameLabel.setText(exercise.get("Name"));
+                musclePrimaryLabel.setText(exercise.get("Primary Muscle"));
+                muscleSecondaryLabel.setText(exercise.get("Secondary Muscle"));
+                typeLabel.setText(exercise.get("Equipment"));
 
-            exerciseNameLabel.setText(exercise.get("Name"));
-            musclePrimaryLabel.setText(exercise.get("Primary Muscle"));
-            muscleSecondaryLabel.setText(exercise.get("Secondary Muscle"));
-            typeLabel.setText(exercise.get("Equipment"));
+                this.exercisesGrid.add(root, counter % gridCols, counter / gridCols);
+                counter += 1;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
-            this.exercisesGrid.add(root, counter % gridCols, counter / gridCols);
-            counter += 1;
         }
     }
     protected void setFilters() {

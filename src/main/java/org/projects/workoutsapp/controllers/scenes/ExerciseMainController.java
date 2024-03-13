@@ -17,10 +17,8 @@ public class ExerciseMainController extends ExerciseController {
 	private Pane exerciseDetailsContainer;
 
 	public ExerciseMainController() {
-		super();
 		this.gridCols = 2;
 	}
-
 	@Override
 	public void chooseExercise(MouseEvent e) throws IOException{
 		Pane exercise = ((Pane)e.getSource());

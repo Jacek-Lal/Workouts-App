@@ -36,8 +36,7 @@ public class MenuController {
         if(mainController.activeView.equals("ExercisesTab")) return;
 
         showActiveWorkout();
-        ExerciseMainController controller = mainController.sceneLoader.loadScene("ExercisesTab");
-        controller.setup();
+        mainController.sceneLoader.loadScene("ExercisesTab");
         mainController.activeView = "ExercisesTab";
     }
     public void goToWorkoutHistoryView() throws IOException {

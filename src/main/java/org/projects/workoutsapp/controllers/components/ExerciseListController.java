@@ -9,20 +9,18 @@ import org.projects.workoutsapp.utility.LabelManager;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class ExerciseListController extends ExerciseController {
 	private Stage stage;
 	private NewWorkoutController parent;
 
-	public ExerciseListController(){
-		super();
+	public ExerciseListController()  {
 		this.gridCols = 4;
 	}
 	public void setup(Stage stage, NewWorkoutController parent) throws IOException {
 		this.stage = stage;
 		this.parent = parent;
-		setFilters();
-		showExercises();
 	}
 	@Override
 	public void chooseExercise(MouseEvent e) throws IOException{
