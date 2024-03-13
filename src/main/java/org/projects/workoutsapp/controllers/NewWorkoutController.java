@@ -115,7 +115,7 @@ public class NewWorkoutController{
 		this.exercisesContainer.add(root,counter % 2, counter / 2);
 		this.exerciseControllers.add(controller);
 
-		controller.setsContainer.getChildren().addListener((ListChangeListener<? super Node>) (change) -> {
+		controller.setsContainer.getChildren().addListener((ListChangeListener<Node>) (change) -> {
 			while (change.next()){
 				int exerciseNumber = exerciseControllers.size();
 				int index = exerciseControllers.indexOf(controller);

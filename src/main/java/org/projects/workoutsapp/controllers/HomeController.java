@@ -54,6 +54,7 @@ public class HomeController{
     }
     private void loadHomeScreenStats() throws IOException {
         List<HashMap<String, String>> workouts = DataLoader.loadWorkouts();
+        if(workouts.isEmpty()) return;
 
         Map<String, Integer> frequencyMap = new HashMap<>();
         int workoutsNumber = 0;

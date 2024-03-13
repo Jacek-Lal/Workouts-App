@@ -12,6 +12,7 @@ import javafx.scene.layout.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SingleExerciseController {
 	public List<SetController> allSets;
@@ -67,10 +68,8 @@ public class SingleExerciseController {
 		exerciseRecord.setDescription(descriptionField.getText());
 		
 		for(SetController set: allSets) {
-			SetRecord setRecord = set.saveSet();
-			if (setRecord == null) continue;
-
-			exerciseRecord.addSet(setRecord);
+			Optional<SetRecord> optSetRecord = set.saveSet();
+			optSetRecord.ifPresent(exerciseRecord::addSet);
 		}
 		return exerciseRecord;
 	}

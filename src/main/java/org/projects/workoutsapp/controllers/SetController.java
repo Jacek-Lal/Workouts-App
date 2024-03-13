@@ -7,6 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 
+import java.util.Optional;
+
 public class SetController {
 	private int id;
 	private double weight;
@@ -72,10 +74,10 @@ public class SetController {
 		double newVolume = totalVolume + this.getSetVolume();
 		this.totalVolumeLabel.setText(String.valueOf(newVolume));
 	}
-	public SetRecord saveSet(){
-		if(this.reps == 0 || (this.weight == 0) && !parent.exerciseType.equals("Bodyweight")) return null;
+	public Optional<SetRecord> saveSet(){
+		if(this.reps == 0 || (this.weight == 0 && !parent.exerciseType.equals("Bodyweight"))) return Optional.empty();
 
-		return new SetRecord(this.id, this.weight, this.reps);
+		return Optional.of(new SetRecord(this.id, this.weight, this.reps));
 	}
 	public void removeSet(){
 		// Update total workout volume

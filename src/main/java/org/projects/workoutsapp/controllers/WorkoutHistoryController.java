@@ -150,7 +150,7 @@ public class WorkoutHistoryController{
 
 				LabelManager.addData(labels, data);
 
-                assert setsContainer != null;
+                //assert setsContainer != null;
                 setsContainer.getChildren().add(set);
 			}	
 		}
