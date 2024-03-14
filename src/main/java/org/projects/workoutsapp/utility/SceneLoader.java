@@ -1,5 +1,6 @@
 package org.projects.workoutsapp.utility;
 
+import javafx.scene.control.Label;
 import org.projects.workoutsapp.controllers.MainController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SceneLoader {
     private final MainController main;
@@ -46,5 +49,15 @@ public class SceneLoader {
 
         Pane root = loader.load();
         container.getChildren().add(root);
+    }
+    public static Parent createComponent(String path, List<String> data) throws IOException {
+        FXMLLoader loader = new FXMLLoader(SceneLoader.class.getResource(path));
+        Parent component = loader.load();
+
+        List<Label> labels = new ArrayList<>();
+        LabelManager.getLabelsWithId(component, labels);
+        LabelManager.addData(labels, data);
+
+        return component;
     }
 }

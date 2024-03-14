@@ -3,7 +3,7 @@ package org.projects.workoutsapp.controllers.scenes;
 import org.projects.workoutsapp.controllers.MainController;
 import org.projects.workoutsapp.objects.WorkoutRecord;
 import org.projects.workoutsapp.utility.Converter;
-import org.projects.workoutsapp.utility.DataLoader;
+import org.projects.workoutsapp.utility.DBConnector;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,7 +54,7 @@ public class HomeController{
         mainController.activeView = "NewWorkoutTab";
     }
     private void loadHomeScreenStats() throws IOException {
-        List<HashMap<String, String>> workouts = DataLoader.loadWorkouts();
+        List<HashMap<String, String>> workouts = DBConnector.loadWorkouts();
         if(workouts.isEmpty()) return;
 
         Map<String, Integer> frequencyMap = new HashMap<>();
@@ -83,7 +83,7 @@ public class HomeController{
         List<Map.Entry<String, Integer>> sortedEntries = new ArrayList<>(frequencyMap.entrySet());
         sortedEntries.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
-        showFavoriteExercises(sortedEntries.subList(0, 5));
+        showFavoriteExercises(sortedEntries.subList(0, 1));
         List<String> stats = List.of(workoutsNumber +" workouts", setsNumber +" sets", Converter.doubleToString(volume) +" kg", Converter.secondsToHours(duration));
         showStats(stats);
         showPlot();

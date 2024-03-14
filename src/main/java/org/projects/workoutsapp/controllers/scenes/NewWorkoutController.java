@@ -4,7 +4,6 @@ import org.projects.workoutsapp.controllers.components.ExerciseListController;
 import org.projects.workoutsapp.controllers.MainController;
 import org.projects.workoutsapp.controllers.components.SingleExerciseController;
 import org.projects.workoutsapp.objects.ExerciseRecord;
-import org.projects.workoutsapp.objects.SetRecord;
 import org.projects.workoutsapp.objects.WorkoutRecord;
 import org.projects.workoutsapp.utility.Converter;
 import javafx.application.Platform;
@@ -19,12 +18,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.projects.workoutsapp.utility.DBConnector;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -162,31 +158,11 @@ public class NewWorkoutController{
 			workout.addExercise(exerciseRecord);
 		}
 		workout.endTime = LocalDateTime.now();
-		writeToDatabase();
+		DBConnector.saveWorkout(this.workout);
+
 		this.mainController.activeWorkout = null;
 		this.mainController.menuController.hideActiveWorkout();
 		this.mainController.menuController.goToHomeView();
-
-	}
-	private void writeToDatabase(){
-		String url = "jdbc:sqlite:src/application/data.sqlite";
-
-		try(Connection connection = DriverManager.getConnection(url)){
-			for (ExerciseRecord exercise : workout.getExercises()){
-				for (SetRecord set : exercise.getSets()){
-					PreparedStatement statement = connection.prepareStatement("INSERT INTO WORKOUTS VALUES (?,?,?,?,?,?,?,?)");
-
-					List<String> data = List.of(workout.getName(), workout.getStartTime(), workout.getEndTime(), exercise.getName(), exercise.getDescription(), set.getId(), set.getWeight(), set.getReps());
-					for (int i = 1; i < data.size() + 1; i++)
-						statement.setString(i, data.get(i-1));
-
-					statement.executeUpdate();
-				}
-			}
-		}
-		catch (SQLException e){
-			e.printStackTrace();
-		}
 	}
 	private void scrollDown() {
 		exercisesScrollPane.applyCss();
@@ -212,7 +188,6 @@ public class NewWorkoutController{
 
 		if(this.mainController.activeWorkout == null)
 			timer.cancel();
-
 	}
 	private void startRest(){
 		Timer timer = new Timer();

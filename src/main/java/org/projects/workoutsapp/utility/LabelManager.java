@@ -1,12 +1,12 @@
 package org.projects.workoutsapp.utility;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LabelManager {
     public static void addData(List<Label> labels, List<String> data){
@@ -22,11 +22,11 @@ public class LabelManager {
         }
         return data;
     }
-    public static List<Label> getLabelsWithId(Parent root){
-        return ((Pane)root).getChildren()
-                .stream()
-                .filter(l-> l.getId() != null)
-                .map(l -> (Label)l)
-                .collect(Collectors.toList());
+    public static void getLabelsWithId(Parent root, List<Label> list){
+        ObservableList<Node> children =  root.getChildrenUnmodifiable();
+        for(Node child : children){
+            if(child instanceof Parent) getLabelsWithId((Parent)child, list);
+            if(child instanceof Label && child.getId() != null) list.add((Label)child);
+        }
     }
 }

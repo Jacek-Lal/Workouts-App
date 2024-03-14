@@ -1,11 +1,10 @@
 package org.projects.workoutsapp.controllers;
 
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -13,16 +12,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import org.projects.workoutsapp.utility.DataLoader;
+import org.projects.workoutsapp.utility.DBConnector;
+import org.projects.workoutsapp.utility.LabelManager;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 public abstract class ExerciseController {
@@ -45,7 +40,7 @@ public abstract class ExerciseController {
         this.activeEquipmentFilter = "";
         this.activeMuscleFilter = "";
 
-        CompletableFuture.supplyAsync(DataLoader::loadExercises)
+        CompletableFuture.supplyAsync(DBConnector::loadExercises)
                 .thenAcceptAsync(result -> {
                     this.exerciseList = result;
                     Platform.runLater(()->{
@@ -60,41 +55,27 @@ public abstract class ExerciseController {
 
         int counter = 0;
         List<HashMap<String, String>> filteredExercises = getFilteredExercises();
+
         for(HashMap<String,String> exercise : filteredExercises) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/components/ExerciseFromDB.fxml"));
-                Pane root = loader.load();
-                root.setId(Integer.toString(counter));
+            Parent root = createExerciseContainer(counter);
 
-                root.setOnMouseClicked(e -> {
-                    try { chooseExercise(e); }
-                    catch (IOException err) { err.printStackTrace(); }
-                });
+            List<Label> labels = new ArrayList<>();
+            LabelManager.getLabelsWithId(root, labels);
 
-                ObservableList<Node> labels = root.getChildren();
-                Label exerciseNameLabel = ((Label) labels.get(0));
-                HBox box = ((HBox) labels.get(3));
-                Label musclePrimaryLabel = (Label) box.getChildren().getFirst();
-                Label muscleSecondaryLabel = (Label) box.getChildren().getLast();
-                Label typeLabel = ((Label) labels.get(4));
+            Optional<String> secondaryMuscle = Optional.ofNullable(exercise.get("SecondaryMuscle"));
+            List<String> data = List.of(exercise.get("Name"),exercise.get("PrimaryMuscle"), secondaryMuscle.orElse(""), exercise.get("Equipment"));
 
-                exerciseNameLabel.setText(exercise.get("Name"));
-                musclePrimaryLabel.setText(exercise.get("Primary Muscle"));
-                muscleSecondaryLabel.setText(exercise.get("Secondary Muscle"));
-                typeLabel.setText(exercise.get("Equipment"));
+            LabelManager.addData(labels, data);
 
-                this.exercisesGrid.add(root, counter % gridCols, counter / gridCols);
-                counter += 1;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            this.exercisesGrid.add(root, counter % gridCols, counter / gridCols);
+            counter += 1;
 
         }
     }
     protected void setFilters() {
         Set<String> equipmentNames = exerciseList.stream().map(map -> map.get("Equipment")).collect(Collectors.toSet());
-        Set<String> muscleNames = exerciseList.stream().map(map -> map.get("Primary Muscle")).collect(Collectors.toSet());
-        Set<String> secondaryMuscleNames = exerciseList.stream().map(map -> map.get("Secondary Muscle")).collect(Collectors.toSet());
+        Set<String> muscleNames = exerciseList.stream().map(map -> map.get("PrimaryMuscle")).collect(Collectors.toSet());
+        Set<String> secondaryMuscleNames = exerciseList.stream().map(map -> map.get("SecondaryMuscle")).collect(Collectors.toSet());
         secondaryMuscleNames.remove(null);
         muscleNames.addAll(secondaryMuscleNames);
         equipmentNames.add("");
@@ -145,7 +126,7 @@ public abstract class ExerciseController {
         this.exercisesGrid.getChildren().clear();
         this.showExercises();
     }
-    public void handleSearchBar(KeyEvent e) throws IOException {
+    public void handleSearchBar(KeyEvent e) {
 
         if((!e.getCharacter().matches("^[a-zA-Z\b ]*$")))
             this.searchBar.deletePreviousChar();
@@ -156,15 +137,31 @@ public abstract class ExerciseController {
     private List<HashMap<String, String>> getFilteredExercises() {
         return this.exerciseList.stream()
                 .filter(r -> this.activeMuscleFilter.isEmpty() ||
-                        r.get("Primary Muscle") == null ||
-                        r.get("Primary Muscle").equals(this.activeMuscleFilter) ||
-                        r.get("Secondary Muscle") == null ||
-                        r.get("Secondary Muscle").equals(this.activeMuscleFilter))
+                        r.get("PrimaryMuscle") == null ||
+                        r.get("PrimaryMuscle").equals(this.activeMuscleFilter) ||
+                        r.get("SecondaryMuscle") == null ||
+                        r.get("SecondaryMuscle").equals(this.activeMuscleFilter))
                 .filter(r -> this.activeEquipmentFilter.isEmpty() ||
                         r.get("Equipment") == null ||
                         r.get("Equipment").equals(this.activeEquipmentFilter))
                 .filter(r -> this.searchBar == null ||
                         r.get("Name").toLowerCase().contains(this.searchBar.getText().toLowerCase()))
                 .collect(Collectors.toList());
+    }
+    private Parent createExerciseContainer(int id){
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/components/ExerciseFromDB.fxml"));
+            root = loader.load();
+            root.setId(Integer.toString(id));
+
+            root.setOnMouseClicked(e -> {
+                try { chooseExercise(e); }
+                catch (IOException err) { err.printStackTrace(); }
+            });
+
+        } catch (IOException err) {err.printStackTrace();}
+
+        return root;
     }
 }

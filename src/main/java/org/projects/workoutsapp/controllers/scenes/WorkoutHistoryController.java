@@ -1,7 +1,7 @@
 package org.projects.workoutsapp.controllers.scenes;
 
 import org.projects.workoutsapp.objects.WorkoutRecord;
-import org.projects.workoutsapp.utility.DataLoader;
+import org.projects.workoutsapp.utility.DBConnector;
 import org.projects.workoutsapp.utility.LabelManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +11,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +26,7 @@ public class WorkoutHistoryController{
 
 	@FXML
 	public void initialize() throws IOException {
-		this.workoutHistory = DataLoader.loadWorkouts();
+		this.workoutHistory = DBConnector.loadWorkouts();
 		this.exercisesContainer = addGrid();
 
 		if(!workoutHistory.isEmpty())
@@ -70,7 +71,8 @@ public class WorkoutHistoryController{
 		
 	}
 	private void addWrapUp(Parent root, List<String> data) {
-		List<Label> labels = LabelManager.getLabelsWithId(root);
+		List<Label> labels = new ArrayList<>();
+				LabelManager.getLabelsWithId(root, labels);
 		LabelManager.addData(labels, data);
 
 		root.setOnMouseClicked(e -> {
@@ -127,7 +129,8 @@ public class WorkoutHistoryController{
 					((Label)((HBox) setsContainer.getChildren().getFirst()).getChildren().getLast()).setText("Reps");
                 }
 
-				List<Label> labels = LabelManager.getLabelsWithId(root);
+				List<Label> labels = new ArrayList<>();
+						LabelManager.getLabelsWithId(root, labels);
 				if(record.get("Description").isEmpty())
 					box.getChildren().remove(descLabel);
 				else
@@ -143,7 +146,8 @@ public class WorkoutHistoryController{
 				FXMLLoader setLoader = new FXMLLoader(getClass().getResource("/fxml/components/SetFromHistory.fxml"));
 				Parent set = setLoader.load();
 				
-				List<Label> labels = LabelManager.getLabelsWithId(set);
+				List<Label> labels = new ArrayList<>();
+						LabelManager.getLabelsWithId(set, labels);
 
 				String weight = record.get("Weight");
 				List<String> data = List.of(record.get("SetNumber"), (weight.equals("0.0") ? "" : weight+"kg x ") + record.get("Reps")+" reps");
