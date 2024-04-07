@@ -7,16 +7,22 @@ import jakarta.persistence.TypedQuery;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.projects.workoutsapp.controllers.components.SetController;
 import org.projects.workoutsapp.controllers.components.SingleExerciseController;
+import org.projects.workoutsapp.dto.FavoriteExercise;
+import org.projects.workoutsapp.dto.HomeScreenStats;
 import org.projects.workoutsapp.dto.WorkoutWrapUpInfo;
+import org.projects.workoutsapp.entities.Exercise;
 import org.projects.workoutsapp.entities.ExerciseRecord;
 import org.projects.workoutsapp.entities.SetRecord;
 import org.projects.workoutsapp.entities.WorkoutRecord;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class DatabaseClient {
+	
 	private static <T> List<T> getData(String jpql, Class<T> className){
 		Map<String, String> props = new HashMap<>();
 		props.put("hibernate.show_sql", "true");
@@ -73,6 +79,50 @@ public class DatabaseClient {
 			}
 		}
 		
+	}
+	public static List<FavoriteExercise> getTopExercises(int limit){
+		Map<String, String> props = new HashMap<>();
+		props.put("hibernate.show_sql", "true");
+		
+		try (EntityManagerFactory emf = new HibernatePersistenceProvider().createContainerEntityManagerFactory(new HibernateUnitInfo(), props)) {
+			try (EntityManager em = emf.createEntityManager()) {
+				em.getTransaction().begin();
+				
+				String jpql = """
+							SELECT NEW org.projects.workoutsapp.dto.FavoriteExercise(er.name, COUNT(sr))
+							FROM SetRecord sr
+							JOIN sr.exercise er
+							GROUP BY er.name
+							ORDER BY COUNT(sr) DESC
+							""";
+				TypedQuery<FavoriteExercise> query = em.createQuery(jpql, FavoriteExercise.class);
+				
+				em.getTransaction().commit();
+				
+				return query.setMaxResults(limit).getResultList();
+			}
+		}
+	}
+	public static HomeScreenStats getStats(){
+		Map<String, String> props = new HashMap<>();
+		props.put("hibernate.show_sql", "true");
+		
+		try (EntityManagerFactory emf = new HibernatePersistenceProvider().createContainerEntityManagerFactory(new HibernateUnitInfo(), props)) {
+			try (EntityManager em = emf.createEntityManager()) {
+				
+				em.getTransaction().begin();
+				
+				String jpql = """
+						  	SELECT COUNT(sr.id), SUM(sr.weight*sr.reps),
+						  	(SELECT COUNT(wr.id) FROM WorkoutRecord wr)
+							FROM SetRecord sr
+							""";
+				TypedQuery<HomeScreenStats> query = em.createQuery(jpql, HomeScreenStats.class);
+				em.getTransaction().commit();
+				
+				return query.getSingleResult();
+			}
+		}
 	}
 	public static void saveWorkout(WorkoutRecord workoutRecord, List<SingleExerciseController> exerciseControllers){
 		if(exerciseControllers.isEmpty()) return;

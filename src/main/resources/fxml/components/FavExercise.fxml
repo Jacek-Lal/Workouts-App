@@ -3,10 +3,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 
-
 <Pane prefHeight="80.0" prefWidth="350.0" styleClass="favExercise" stylesheets="@../../css/application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="14.0" layoutY="7.0" prefHeight="68.0" prefWidth="239.0" style="-fx-font-size: 22;" styleClass="fontStyle" text="Overhand Grip Bent Over Row" wrapText="true" />
-      <Label alignment="CENTER_RIGHT" layoutX="267.0" layoutY="25.0" prefHeight="30.0" prefWidth="68.0" style="-fx-font-size: 20;" styleClass="fontStyle" text="22 sets" />
+      <Label fx:id="exerciseName" layoutX="14.0" layoutY="7.0" prefHeight="68.0" prefWidth="239.0" style="-fx-font-size: 22;" styleClass="fontStyle" text="Overhand Grip Bent Over Row" wrapText="true" />
+      <Label fx:id="exerciseSets" alignment="CENTER_RIGHT" layoutX="267.0" layoutY="25.0" prefHeight="30.0" prefWidth="68.0" style="-fx-font-size: 20;" styleClass="fontStyle" text="22 sets" />
    </children>
 </Pane>

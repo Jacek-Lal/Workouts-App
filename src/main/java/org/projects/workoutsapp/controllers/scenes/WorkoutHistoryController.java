@@ -94,7 +94,7 @@ public class WorkoutHistoryController{
 		System.out.println(workoutId);
 		int counter = 0;
 		
-		for(ExerciseRecord exercise : workoutData){
+		for(ExerciseRecord exerciseRecord : workoutData){
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/components/ExerciseFromHistory.fxml"));
 			Parent root = loader.load();
 			
@@ -102,17 +102,17 @@ public class WorkoutHistoryController{
 			LabelManager.getLabelsWithId(root, labels);
 			
 			String exType = "Weight & reps";
-			if(exercise.getSets().getFirst().getWeight() == 0.0)
+			if(exerciseRecord.getSets().getFirst().getWeight() == 0.0)
 				exType = "Reps";
 			
-			LabelManager.addData(labels, List.of(exercise.getName(), exercise.getDescription(), exType));
+			LabelManager.addData(labels, List.of(exerciseRecord.getName(), exerciseRecord.getDescription(), exType));
 			
 			VBox setsContainer = new VBox();
 			LabelManager.getElementById(root, setsContainer, "setsContainer");
 			
 			exercisesContainer.add(root, counter % 2, counter / 2);
 			
-			for(SetRecord set : exercise.getSets()){
+			for(SetRecord set : exerciseRecord.getSets()){
 				FXMLLoader setLoader = new FXMLLoader(getClass().getResource("/fxml/components/SetFromHistory.fxml"));
 				Parent setRoot = setLoader.load();
 				

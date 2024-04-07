@@ -1,9 +1,12 @@
 package org.projects.workoutsapp.controllers.scenes;
 
+import javafx.scene.Parent;
 import org.projects.workoutsapp.controllers.MainController;
+import org.projects.workoutsapp.dto.FavoriteExercise;
+import org.projects.workoutsapp.dto.HomeScreenStats;
 import org.projects.workoutsapp.entities._WorkoutRecord_old;
+import org.projects.workoutsapp.persistence.DatabaseClient;
 import org.projects.workoutsapp.utility.Converter;
-import org.projects.workoutsapp.utility.DatabaseClient;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.projects.workoutsapp.utility.LabelManager;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -54,56 +58,66 @@ public class HomeController{
         mainController.activeView = "NewWorkoutTab";
     }
     private void loadHomeScreenStats() throws IOException {
-        List<HashMap<String, String>> workouts = DatabaseClient.getWorkouts();
-        if(workouts.isEmpty()) return;
-
-        Map<String, Integer> frequencyMap = new HashMap<>();
-        int workoutsNumber = 0;
-        int setsNumber = workouts.size();
-        double volume = 0;
-        long duration = 0;
-        String currDate = "";
-
-        for (HashMap<String, String> map : workouts) {
-            String value = map.get("Exercise");
-            frequencyMap.put(value, frequencyMap.getOrDefault(value, 0) + 1);
-
-            if(!map.get("StartTime").equals(currDate)){
-                currDate = map.get("StartTime");
-                workoutsNumber += 1;
-
-                LocalDateTime start = LocalDateTime.parse(map.get("StartTime"), _WorkoutRecord_old.dtf);
-                LocalDateTime end = LocalDateTime.parse(map.get("EndTime"), _WorkoutRecord_old.dtf);
-                duration += ChronoUnit.SECONDS.between(start, end);
-            }
-
-            volume += Double.parseDouble(map.get("Weight")) * Double.parseDouble(map.get("Reps"));
-        }
-
-        List<Map.Entry<String, Integer>> sortedEntries = new ArrayList<>(frequencyMap.entrySet());
-        sortedEntries.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
-
-        showFavoriteExercises(sortedEntries.subList(0, 1));
-        List<String> stats = List.of(workoutsNumber +" workouts", setsNumber +" sets", Converter.doubleToString(volume) +" kg", Converter.secondsToHours(duration));
-        showStats(stats);
+        showFavoriteExercises();
+        showStats();
         showPlot();
     }
-    private void showFavoriteExercises(List<Map.Entry<String, Integer>> exercises) throws IOException {
-
-        for (Map.Entry<String, Integer> ex : exercises){
+//    private void loadHomeScreenStats() throws IOException {
+//        List<HashMap<String, String>> workouts = DatabaseClient.getWorkouts();
+//        if(workouts.isEmpty()) return;
+//
+//        Map<String, Integer> frequencyMap = new HashMap<>();
+//        int workoutsNumber = 0;
+//        int setsNumber = workouts.size();
+//        double volume = 0;
+//        long duration = 0;
+//        String currDate = "";
+//
+//        for (HashMap<String, String> map : workouts) {
+//            String value = map.get("Exercise");
+//            frequencyMap.put(value, frequencyMap.getOrDefault(value, 0) + 1);
+//
+//            if(!map.get("StartTime").equals(currDate)){
+//                currDate = map.get("StartTime");
+//                workoutsNumber += 1;
+//
+//                LocalDateTime start = LocalDateTime.parse(map.get("StartTime"), _WorkoutRecord_old.dtf);
+//                LocalDateTime end = LocalDateTime.parse(map.get("EndTime"), _WorkoutRecord_old.dtf);
+//                duration += ChronoUnit.SECONDS.between(start, end);
+//            }
+//
+//            volume += Double.parseDouble(map.get("Weight")) * Double.parseDouble(map.get("Reps"));
+//        }
+//
+//        List<Map.Entry<String, Integer>> sortedEntries = new ArrayList<>(frequencyMap.entrySet());
+//        sortedEntries.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+//
+//        showFavoriteExercises(sortedEntries.subList(0, 1));
+//        List<String> stats = List.of(workoutsNumber +" workouts", setsNumber +" sets", Converter.doubleToString(volume) +" kg", Converter.secondsToHours(duration));
+//        showStats(stats);
+//        showPlot();
+//    }
+    private void showFavoriteExercises() throws IOException {
+        List<FavoriteExercise> favExercises = DatabaseClient.getTopExercises(5);
+        
+        for (FavoriteExercise ex : favExercises){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/components/FavExercise.fxml"));
-            Pane root = loader.load();
-            ((Label)root.getChildren().getFirst()).setText(ex.getKey());
-            ((Label)root.getChildren().getLast()).setText(ex.getValue()+" sets");
+            Parent root = loader.load();
+            
+            List<Label> labels = new ArrayList<>();
+            LabelManager.getLabelsWithId(root, labels);
+            LabelManager.addData(labels, List.of(ex.getName(), String.valueOf(ex.getTotalSets())));
 
             favExercisesContainer.getChildren().add(root);
         }
     }
-    private void showStats(List<String> stats){
-        ObservableList<Node> children = statsGrid.getChildren();
-
-        for(int i = 0; i < children.size(); i++)
-            ((Label)((Pane)children.get(i)).getChildren().getLast()).setText(stats.get(i));
+    private void showStats(){
+        HomeScreenStats stats = DatabaseClient.getStats();
+        List<Label> labels = new ArrayList<>();
+        
+        LabelManager.getLabelsWithId(statsGrid, labels);
+        LabelManager.addData(labels, List.of(stats.getWorkouts()+" workouts", stats.getSets()+" sets", stats.getVolume()+" kg",""));
+        
     }
     private void showPlot(){}
 }

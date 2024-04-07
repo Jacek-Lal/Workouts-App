@@ -61,7 +61,8 @@ public class HibernateUnitInfo implements PersistenceUnitInfo {
 	public List<String> getManagedClassNames() {
 		return List.of("org.projects.workoutsapp.entities.SetRecord",
 				"org.projects.workoutsapp.entities.ExerciseRecord",
-				"org.projects.workoutsapp.entities.WorkoutRecord");
+				"org.projects.workoutsapp.entities.WorkoutRecord",
+				"org.projects.workoutsapp.entities.Exercise");
 	}
 	
 	@Override

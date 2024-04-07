@@ -22,6 +22,7 @@ public class ExerciseRecord {
 	private WorkoutRecord workout;
 	
 	@NonNull private String name;
+	
 	@NonNull private String description;
 	
 	@OneToMany(mappedBy = "exercise", cascade = CascadeType.PERSIST)
