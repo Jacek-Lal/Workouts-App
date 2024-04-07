@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class LabelManager {
     public static void addData(List<Label> labels, List<String> data){
@@ -27,6 +28,15 @@ public class LabelManager {
         for(Node child : children){
             if(child instanceof Parent) getLabelsWithId((Parent)child, list);
             if(child instanceof Label && child.getId() != null) list.add((Label)child);
+        }
+    }
+    public static void getElementById(Parent root, Node el, String fxid){
+        ObservableList<Node> children =  root.getChildrenUnmodifiable();
+        for(Node child : children){
+            System.out.println(child.getId());
+            if(child.getId() != null && child.getId().equals(fxid))
+                el = child;
+            if(child instanceof Parent) getElementById((Parent)child, el, fxid);
         }
     }
 }

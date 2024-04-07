@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import org.projects.workoutsapp.utility.DBConnector;
+import org.projects.workoutsapp.utility.DatabaseClient;
 import org.projects.workoutsapp.utility.LabelManager;
 
 import java.io.IOException;
@@ -40,7 +40,7 @@ public abstract class ExerciseController {
         this.activeEquipmentFilter = "";
         this.activeMuscleFilter = "";
 
-        CompletableFuture.supplyAsync(DBConnector::loadExercises)
+        CompletableFuture.supplyAsync(DatabaseClient::getExercises)
                 .thenAcceptAsync(result -> {
                     this.exerciseList = result;
                     Platform.runLater(()->{

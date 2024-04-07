@@ -1,19 +1,19 @@
-package org.projects.workoutsapp.objects;
+package org.projects.workoutsapp.entities;
 
 import java.util.ArrayList;
 
-public class ExerciseRecord {
+public class _ExerciseRecord_old {
 	private final String name;
 	private String description;
-	private final ArrayList<SetRecord> sets;
+	private final ArrayList<_SetRecord_old> sets;
 	
-	public ExerciseRecord(String name){
+	public _ExerciseRecord_old(String name){
 		this.name = name;
 		this.description = "";
 		this.sets = new ArrayList<>();
 	}
 	
-	public void addSet(SetRecord set) {
+	public void addSet(_SetRecord_old set) {
 		this.sets.add(set);
 	}
 	public void setDescription(String description) {
@@ -25,7 +25,7 @@ public class ExerciseRecord {
 	public String getDescription() {
 		return this.description;
 	}
-	public ArrayList<SetRecord> getSets(){
+	public ArrayList<_SetRecord_old> getSets(){
 		return this.sets;
 	}
 	@Override

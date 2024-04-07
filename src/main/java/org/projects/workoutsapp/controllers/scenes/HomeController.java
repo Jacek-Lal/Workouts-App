@@ -1,9 +1,9 @@
 package org.projects.workoutsapp.controllers.scenes;
 
 import org.projects.workoutsapp.controllers.MainController;
-import org.projects.workoutsapp.objects.WorkoutRecord;
+import org.projects.workoutsapp.entities._WorkoutRecord_old;
 import org.projects.workoutsapp.utility.Converter;
-import org.projects.workoutsapp.utility.DBConnector;
+import org.projects.workoutsapp.utility.DatabaseClient;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,7 +54,7 @@ public class HomeController{
         mainController.activeView = "NewWorkoutTab";
     }
     private void loadHomeScreenStats() throws IOException {
-        List<HashMap<String, String>> workouts = DBConnector.loadWorkouts();
+        List<HashMap<String, String>> workouts = DatabaseClient.getWorkouts();
         if(workouts.isEmpty()) return;
 
         Map<String, Integer> frequencyMap = new HashMap<>();
@@ -72,8 +72,8 @@ public class HomeController{
                 currDate = map.get("StartTime");
                 workoutsNumber += 1;
 
-                LocalDateTime start = LocalDateTime.parse(map.get("StartTime"), WorkoutRecord.dtf);
-                LocalDateTime end = LocalDateTime.parse(map.get("EndTime"), WorkoutRecord.dtf);
+                LocalDateTime start = LocalDateTime.parse(map.get("StartTime"), _WorkoutRecord_old.dtf);
+                LocalDateTime end = LocalDateTime.parse(map.get("EndTime"), _WorkoutRecord_old.dtf);
                 duration += ChronoUnit.SECONDS.between(start, end);
             }
 

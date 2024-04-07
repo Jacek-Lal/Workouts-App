@@ -11,7 +11,6 @@ import org.projects.workoutsapp.utility.LabelManager;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class ExerciseListController extends ExerciseController {
 	private Stage stage;

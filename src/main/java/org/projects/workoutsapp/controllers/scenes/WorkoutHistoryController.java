@@ -1,7 +1,11 @@
 package org.projects.workoutsapp.controllers.scenes;
 
-import org.projects.workoutsapp.objects.WorkoutRecord;
-import org.projects.workoutsapp.utility.DBConnector;
+import javafx.scene.Node;
+import org.projects.workoutsapp.dto.WorkoutWrapUpInfo;
+import org.projects.workoutsapp.entities.ExerciseRecord;
+import org.projects.workoutsapp.entities.SetRecord;
+import org.projects.workoutsapp.entities.WorkoutRecord;
+import org.projects.workoutsapp.persistence.DatabaseClient;
 import org.projects.workoutsapp.utility.LabelManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +21,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WorkoutHistoryController{
-    private List<HashMap<String, String>> workoutHistory;
 	@FXML
 	private VBox exercisesWrapUpContainer;
 	@FXML
@@ -26,64 +29,42 @@ public class WorkoutHistoryController{
 
 	@FXML
 	public void initialize() throws IOException {
-		this.workoutHistory = DBConnector.loadWorkouts();
 		this.exercisesContainer = addGrid();
-
-		if(!workoutHistory.isEmpty())
-			loadExercisesWrapUp();
+		loadExercisesWrapUp();
 	}
 	private void loadExercisesWrapUp() throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/components/WorkoutWrapUp.fxml"));
-		Parent root = loader.load();	
+		List<WorkoutWrapUpInfo> wrapUpData = DatabaseClient.getWrapUpData();
 		
-		String workoutName = this.workoutHistory.getFirst().get("Name");
-		String workoutDate = this.workoutHistory.getFirst().get("StartTime");
-		String duration = WorkoutRecord.getDuration(this.workoutHistory.getFirst().get("StartTime"),this.workoutHistory.getFirst().get("EndTime"));
-		double workoutVolume = 0;
-		int workoutSets = 0;
-
-		for (HashMap<String, String> record : this.workoutHistory) {
-			String currDate = record.get("StartTime");
+		Parent root;
+		
+		for(WorkoutWrapUpInfo wrapUp : wrapUpData){
+			root = new FXMLLoader(getClass().getResource("/fxml/components/WorkoutWrapUp.fxml")).load();
+			WorkoutRecord workout = wrapUp.getWorkout();
+			List<String> data = List.of(workout.getName(),
+								String.valueOf(workout.getStartTime()),
+								workout.getDuration(),
+								String.valueOf(wrapUp.getTotalWeight()),
+								String.valueOf(wrapUp.getTotalSets()));
 			
-			if(!currDate.equals(workoutDate)) {
-				List<String> wrapUpData = List.of(workoutName, workoutDate, duration, workoutVolume + "kg", workoutSets + " sets");
-
-				addWrapUp(root, wrapUpData);
-
-				loader = new FXMLLoader(getClass().getResource("/fxml/components/WorkoutWrapUp.fxml"));
-				root = loader.load();
-
-				workoutName = record.get("Name");
-				workoutDate = currDate;
-				duration =  WorkoutRecord.getDuration(record.get("StartTime"), record.get("EndTime"));
-				workoutVolume = 0;
-				workoutSets = 0;
-			}
-			
-			double setVolume = Double.parseDouble(record.get("Weight")) * Double.parseDouble(record.get("Reps"));
-			
-			workoutVolume += setVolume;
-			workoutSets += 1;
-
+			root.setUserData(workout.getId());
+			addWrapUp(root, data);
 		}
-		List<String> wrapUpData = List.of(workoutName, workoutDate, duration, workoutVolume + "kg", workoutSets + " sets");
-		addWrapUp(root, wrapUpData);
-		
 	}
 	private void addWrapUp(Parent root, List<String> data) {
 		List<Label> labels = new ArrayList<>();
-				LabelManager.getLabelsWithId(root, labels);
+		LabelManager.getLabelsWithId(root, labels);
 		LabelManager.addData(labels, data);
 
 		root.setOnMouseClicked(e -> {
-            List<HashMap<String, String>> workoutRecords = getWorkoutRecords(data.get(1));
+            //List<HashMap<String, String>> workoutRecords = getWorkoutRecords(data.get(1));
+			//System.out.println(e.getTarget());
             try {
-                openWorkout(workoutRecords);
+                openWorkout((Integer)((Node)e.getTarget()).getUserData());
             } catch (IOException err) {
                 err.printStackTrace();
             }
         });
-		
+
 		exercisesWrapUpContainer.getChildren().addFirst(root);
 	}
 	private GridPane addGrid(){
@@ -106,63 +87,48 @@ public class WorkoutHistoryController{
 
 		return gridPane;
 	}
-	private void openWorkout(List<HashMap<String, String>> workoutRecords) throws IOException {
+	private void openWorkout(Integer workoutId) throws IOException {
 		exercisesContainer.getChildren().clear();
-
-		String currExercise = "";
-		VBox setsContainer = null;
+		
+		List<ExerciseRecord> workoutData = DatabaseClient.getWorkoutDataById(workoutId);
+		System.out.println(workoutId);
 		int counter = 0;
-
-		for (HashMap<String, String> record : workoutRecords) {
+		
+		for(ExerciseRecord exercise : workoutData){
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/components/ExerciseFromHistory.fxml"));
+			Parent root = loader.load();
 			
-			if(!currExercise.equals(record.get("Exercise"))) {
-				currExercise = record.get("Exercise");
-				
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/components/ExerciseFromHistory.fxml"));
-				Parent root = loader.load();
-
-				VBox box = (VBox) ((Pane) root).getChildren().getLast();
-				Label descLabel = (Label) box.getChildren().getFirst();
-				setsContainer = (VBox) box.getChildren().getLast();
-
-				if(record.get("Weight").equals("0.0")) {
-					((Label)((HBox) setsContainer.getChildren().getFirst()).getChildren().getLast()).setText("Reps");
-                }
-
-				List<Label> labels = new ArrayList<>();
-						LabelManager.getLabelsWithId(root, labels);
-				if(record.get("Description").isEmpty())
-					box.getChildren().remove(descLabel);
-				else
-					labels.add(descLabel);
-
-				LabelManager.addData(labels, List.of(record.get("Exercise"), record.get("Description")));
-
-				exercisesContainer.add(root, counter % 2, counter / 2);
-				counter += 1;
-			}
-					
-			if(currExercise.equals(record.get("Exercise"))) {
+			List<Label> labels = new ArrayList<>();
+			LabelManager.getLabelsWithId(root, labels);
+			
+			String exType = "Weight & reps";
+			if(exercise.getSets().getFirst().getWeight() == 0.0)
+				exType = "Reps";
+			
+			LabelManager.addData(labels, List.of(exercise.getName(), exercise.getDescription(), exType));
+			
+			VBox setsContainer = new VBox();
+			LabelManager.getElementById(root, setsContainer, "setsContainer");
+			
+			exercisesContainer.add(root, counter % 2, counter / 2);
+			
+			for(SetRecord set : exercise.getSets()){
 				FXMLLoader setLoader = new FXMLLoader(getClass().getResource("/fxml/components/SetFromHistory.fxml"));
-				Parent set = setLoader.load();
+				Parent setRoot = setLoader.load();
 				
-				List<Label> labels = new ArrayList<>();
-						LabelManager.getLabelsWithId(set, labels);
-
-				String weight = record.get("Weight");
-				List<String> data = List.of(record.get("SetNumber"), (weight.equals("0.0") ? "" : weight+"kg x ") + record.get("Reps")+" reps");
-
+				labels = new ArrayList<>();
+				LabelManager.getLabelsWithId(setRoot, labels);
+				
+				String weight = String.valueOf(set.getWeight());
+				List<String> data = List.of(String.valueOf(set.getNumber()), (weight.equals("0.0") ? "" : weight+"kg x ") + set.getReps()+" reps");
+				
 				LabelManager.addData(labels, data);
-
-                //assert setsContainer != null;
-                setsContainer.getChildren().add(set);
-			}	
+				
+				setsContainer.getChildren().add(setRoot);
+			}
+			counter += 1;
 		}
 	}
-	private List<HashMap<String, String>> getWorkoutRecords(String date){
-		return this.workoutHistory.stream()
-				.filter(r -> r.get("StartTime").equals(date))
-				.collect(Collectors.toList());
-	}
+	
 
 }

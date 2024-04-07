@@ -1,6 +1,8 @@
 package org.projects.workoutsapp.controllers.components;
 
-import org.projects.workoutsapp.objects.SetRecord;
+import lombok.Getter;
+import lombok.Setter;
+import org.projects.workoutsapp.entities._SetRecord_old;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -9,6 +11,8 @@ import javafx.scene.layout.HBox;
 
 import java.util.Optional;
 
+@Setter
+@Getter
 public class SetController {
 	private int id;
 	private double weight;
@@ -74,10 +78,8 @@ public class SetController {
 		double newVolume = totalVolume + this.getSetVolume();
 		this.totalVolumeLabel.setText(String.valueOf(newVolume));
 	}
-	public Optional<SetRecord> saveSet(){
-		if(this.reps == 0 || (this.weight == 0 && !parent.exerciseType.equals("Bodyweight"))) return Optional.empty();
-
-		return Optional.of(new SetRecord(this.id, this.weight, this.reps));
+	public boolean isValid(){
+		return this.reps != 0 && (this.weight != 0 || parent.exerciseType.equals("Bodyweight"));
 	}
 	public void removeSet(){
 		// Update total workout volume
@@ -87,7 +89,6 @@ public class SetController {
 
 		parent.removeSet(this);
 	}
-	public void setId(int id){this.id = id;}
-	public int getId() {return this.id;}
+	
 	public double getSetVolume() {return this.weight*this.reps;}
 }

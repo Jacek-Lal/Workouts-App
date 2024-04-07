@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import org.projects.workoutsapp.utility.DBConnector;
+import org.projects.workoutsapp.utility.DatabaseClient;
 import org.projects.workoutsapp.utility.LabelManager;
 import org.projects.workoutsapp.utility.SceneLoader;
 
@@ -25,7 +25,7 @@ public class ExerciseDetailsController{
 	private VBox detailsContainer;
 	
 	public void setup(String exerciseName) throws IOException {
-        this.currentExerciseRecords = DBConnector.loadExerciseRecords(exerciseName);
+        this.currentExerciseRecords = DatabaseClient.getExerciseRecords(exerciseName);
 		this.summaryData = getSummaryData();
 
 		exerciseNameLabel.setText(exerciseName);

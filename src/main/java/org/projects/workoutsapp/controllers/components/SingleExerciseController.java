@@ -1,8 +1,8 @@
 package org.projects.workoutsapp.controllers.components;
 
 import org.projects.workoutsapp.controllers.scenes.NewWorkoutController;
-import org.projects.workoutsapp.objects.ExerciseRecord;
-import org.projects.workoutsapp.objects.SetRecord;
+import org.projects.workoutsapp.entities._ExerciseRecord_old;
+import org.projects.workoutsapp.entities._SetRecord_old;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,9 +25,9 @@ public class SingleExerciseController {
 	@FXML
 	public VBox setsContainer;
 	@FXML
-	private TextField descriptionField;
+	public TextField descriptionField;
 	@FXML
-	private Label exerciseName;
+	public Label exerciseName;
 	@FXML
 	private HBox setHeader;
 
@@ -64,16 +64,6 @@ public class SingleExerciseController {
 
 		//parent.scrollDown();
 	}
-	public ExerciseRecord saveExercise() {
-		ExerciseRecord exerciseRecord = new ExerciseRecord(exerciseData.getFirst());
-		exerciseRecord.setDescription(descriptionField.getText());
-		
-		for(SetController set: allSets) {
-			Optional<SetRecord> optSetRecord = set.saveSet();
-			optSetRecord.ifPresent(exerciseRecord::addSet);
-		}
-		return exerciseRecord;
-	}
 	public void removeSet(SetController set) {
 		this.allSets.remove(set);
 		setsContainer.getChildren().remove(set.container);
@@ -99,5 +89,7 @@ public class SingleExerciseController {
 		parent.showExercises();
 		deleteExercise();
 	}
-
+	public boolean isValid(){
+		return !allSets.isEmpty();
+	}
 }

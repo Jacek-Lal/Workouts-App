@@ -3,8 +3,10 @@ package org.projects.workoutsapp.controllers.scenes;
 import org.projects.workoutsapp.controllers.components.ExerciseListController;
 import org.projects.workoutsapp.controllers.MainController;
 import org.projects.workoutsapp.controllers.components.SingleExerciseController;
-import org.projects.workoutsapp.objects.ExerciseRecord;
-import org.projects.workoutsapp.objects.WorkoutRecord;
+import org.projects.workoutsapp.entities.WorkoutRecord;
+import org.projects.workoutsapp.entities._ExerciseRecord_old;
+import org.projects.workoutsapp.entities._WorkoutRecord_old;
+import org.projects.workoutsapp.persistence.DatabaseClient;
 import org.projects.workoutsapp.utility.Converter;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
@@ -18,7 +20,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.projects.workoutsapp.utility.DBConnector;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -54,7 +55,10 @@ public class NewWorkoutController{
 		this.mainController = main;
 		this.exerciseControllers = new ArrayList<>();
 		this.scene = (AnchorPane) exercisesScrollPane.getParent();
+		
 		this.workout = new WorkoutRecord();
+		this.workout.setStartTime(LocalDateTime.now());
+		
 		this.duration = 0;
 		this.rest = 0;
 		this.exercisesContainer = addGrid();
@@ -143,7 +147,6 @@ public class NewWorkoutController{
 		scrollDown();
 	}
 	public void deleteExercise(SingleExerciseController exercise) {
-		//exercisesContainer.getChildren().remove(exercise.container);
 		exercisesContainer.getChildren().clear();
 		exerciseControllers.remove(exercise);
 		int counter = 0;
@@ -152,13 +155,14 @@ public class NewWorkoutController{
 			counter += 1;
 		}
 	}
+	public boolean isValid(){
+		return !exerciseControllers.isEmpty();
+	}
 	public void saveWorkout() throws IOException {
-		for (SingleExerciseController exercise : exerciseControllers) {
-			ExerciseRecord exerciseRecord = exercise.saveExercise();
-			workout.addExercise(exerciseRecord);
-		}
-		workout.endTime = LocalDateTime.now();
-		DBConnector.saveWorkout(this.workout);
+		workout.setEndTime(LocalDateTime.now());
+		
+		if(this.isValid())
+			DatabaseClient.saveWorkout(this.workout, this.exerciseControllers);
 
 		this.mainController.activeWorkout = null;
 		this.mainController.menuController.hideActiveWorkout();
